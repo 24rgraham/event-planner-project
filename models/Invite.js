@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Event extends Model {}
+class Invite extends Model {}
 
-Event.init(
+Invite.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,31 +15,23 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
-      type: Sequelize.DATEONLY,
-      allowNull: false,
-      validate: {
-        isDate: true,
-      },
-    },
-    time: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    event_creator: {
+    invitee_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "user",
         key: "id",
       },
+    },
+    event_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "event",
+        key: "id",
+      },
+    },
+    response: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
@@ -47,8 +39,8 @@ Event.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "event",
+    modelName: "invite",
   }
 );
 
-module.exports = Event;
+module.exports = Invite;
