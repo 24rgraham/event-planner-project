@@ -37,7 +37,7 @@ const userData = [
 const eventData = [
     {
         name: "Harry's half birthday party",
-        data: 2022-11-31,
+        date: 2022-11-31,
         time: "10:00",
         location: "Malfoy Manor",
         description: "Come celebrate my big day! Eat yourself to death with our death-eater cake! Polyjuice potion on the house!",
@@ -45,7 +45,7 @@ const eventData = [
     },
     {
         name: "Captain Jack Sparrow's Send-Off Bash",
-        data: 2022-11-25,
+        date: 2022-11-25,
         time: "1:00",
         location: "Tortuga",
         description: "Where's the rum gone? We bought it all up for my big going away sendoff! Where am I going? Davy Jones' locker!!",
@@ -56,38 +56,35 @@ const eventData = [
 const inviteData = [
     {
         name: "Jacob Marcus",
-        invitee_id: NULL,
-        event_id: 0,
+        event_id: 1,
         response: "Going"
     },
     {
         name: "John Cusack",
-        invitee_id: 0,
+        invitee_id: 1,
         event_id: 1,
         response: "Going"
     },
     {
         name: "Daffy Duck",
-        invitee_id: NULL,
-        event_id: 0,
+        event_id: 1,
         response: "Maybe"
     },
     {
         name: "Bugs Bunny",
         invitee_id: 4,
-        event_id: 1,
+        event_id: 2,
         response: "Maybe"
     },
     {
         name: "Michael Jordan",
-        invitee_id: NULL,
-        event_id: 0,
+        event_id: 1,
         response: "Going"
     },
     {
         name: "Lernantino",
         invitee_id: 1,
-        event_id: 1,
+        event_id: 2,
         response: "Maybe"
     },
 ]

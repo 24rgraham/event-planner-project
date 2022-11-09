@@ -16,7 +16,7 @@ Event.init(
       allowNull: false,
     },
     date: {
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
         isDate: true,
