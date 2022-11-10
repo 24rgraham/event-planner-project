@@ -1,0 +1,27 @@
+{{!-- Event takes in a name, date, time, location, and description --}}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Create New Event</h2>
+    </div>
+    <form class="card-body" id="new-event-form">
+        <label for="event-title" class="form-label">Title</label>
+        <input name="event-title" type="text" id="event-title">
+
+        <label for="event-date" class="form-label">Date</label>
+        <input name="event-date" type="text" id="event-date">
+
+        <label for="event-time" class="form-label">Time</label>
+        <input name="event-time" type="text" id="event-time">
+
+        <label for="event-Location" class="form-label">Location</label>
+        <input name="event-Location" type="text" id="event-Location">
+
+        <label for="event-body" class="form-label">Description</label>
+        <textarea name="event-body" class="form-input"></textarea>
+
+        <button type="submit"class="btn">Create Event</button>
+    </form>
+</div>
+
+<script src="../public/js/addEvent.js"></script>
