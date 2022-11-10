@@ -58,9 +58,9 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
     // signup
-    if (req.session.loggedIn) {
-      return res.redirect('/signup');
-    }
+    // if (req.session.loggedIn) {
+    //   return res.redirect('/signup');
+    // }
     res.render('signup', {
         loggedIn: false,
         userId: null
