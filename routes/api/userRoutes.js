@@ -2,6 +2,14 @@ const router = require('express').Router();
 const {User} = require('../../models');
 const bcrypt = require("bcrypt");
 
+
+router.get('/',(req,res)=>{
+    User.findAll().then(userData=>{
+        res.json(userData)
+    }).catch(err=>{
+        res.status(500).json({msg:"An error has occurred",err})
+    })
+  })
 // create new user
 router.post('/', (req,res)=>{
     User.create({
