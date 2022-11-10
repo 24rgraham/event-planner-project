@@ -13,7 +13,6 @@ router.get('/',(req,res)=>{
   })
 
 //get one event
-
 router.get('/:id', (req,res) => {
     Event.findByPk(req.params.id)
     .then((event)=>{
@@ -25,7 +24,6 @@ router.get('/:id', (req,res) => {
 })
 
 //create event
-
 router.post('/', async (req,res) => {
     try {
         const newEvent = await Event.create({
