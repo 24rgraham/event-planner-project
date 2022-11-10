@@ -20,6 +20,11 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get("/sessions", (req,res)=>{
+    res.json(req.session)
+  })
+  
+
 router.get('/event/id:', async (req, res) => {
     // Shows one event
     try {
@@ -60,12 +65,9 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
     // signup
     if (req.session.loggedIn) {
-      return res.redirect('/signup');
+      return res.redirect('/');
     }
-    res.render('signup', {
-        loggedIn: false,
-        userId: null
-    });
+    res.render('signup');
 });
 
 // shows user events
