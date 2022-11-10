@@ -65,12 +65,9 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
     // signup
     if (req.session.loggedIn) {
-      return res.redirect('/signup');
+      return res.redirect('/');
     }
-    res.render('signup', {
-        loggedIn: false,
-        userId: null
-    });
+    res.render('signup');
 });
 
 // shows user events
