@@ -7,9 +7,10 @@ router.get('/', async (req, res) => {
         const eventData = await Event.findAll({
             include: [User]
         })
+        console.log(eventData)
 
         // serialize
-        const events = eventData.map((event) => post.get({ plain: true }))
+        const events = eventData.map((event) => event.get({ plain: true }))
         res.render('homepage', {
             events,
             loggedIn: req.session.loggedIn
@@ -58,9 +59,9 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
     // signup
-    // if (req.session.loggedIn) {
-    //   return res.redirect('/signup');
-    // }
+    if (req.session.loggedIn) {
+      return res.redirect('/signup');
+    }
     res.render('signup', {
         loggedIn: false,
         userId: null
