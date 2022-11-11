@@ -30,14 +30,14 @@ router.post('/', async (req,res) => {
             name: req.body.name,
             date: req.body.date,
             time: req.body.time,
-            location: req.body.location,
+            location: req.body.place,
             description: req.body.description,
             event_creator: req.body.event_creator
         });
         res.status(200).json(newEvent)
     } catch (err) {
         res.status(400).json(err);
-    }
+    } 
 })
 
 //update event

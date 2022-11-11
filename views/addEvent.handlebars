@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h2>Create New Event</h2>
+        <h2>{{name}}'s New Event</h2>
     </div>
     <form class="card-body" id="new-event-form">
         <label for="event-title" class="form-label">Title</label>
@@ -14,8 +14,8 @@
         <label for="event-time" class="form-label">Time</label>
         <input name="event-time" type="time" id="event-time">
 
-        <label for="event-Location" class="form-label">Location</label>
-        <input name="event-Location" type="text" id="event-Location">
+        <label for="event-location" class="form-label">Location</label>
+        <input name="event-location" type="text" id="event-location">
 
         <label for="event-body" class="form-label">Description</label>
         <textarea name="event-body" class="form-input"></textarea>
@@ -24,4 +24,7 @@
     </form>
 </div>
 
-<script src="../public/js/addEvent.js"></script>
+<p id="user-name" style="display:none">{{id}}</p>
+
+
+<script src="/js/addEvent.js"></script>
