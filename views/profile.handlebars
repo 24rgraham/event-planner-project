@@ -1,10 +1,11 @@
 <h1>This is my profile Welcome back, {{name}}</h1>
 
-{{#each Events}}
+{{#each events}}
     <div class = "card">
-    <header>{{name}}</header>
-    <p>{{date}}</p>
-    <p>{{time}}</p>
+
+    <a href="/event/{{id}}"><h3>{{name}}</h3></a>
+
+    <p>Join us on {{date}} at {{time}} for an amazing time!</p>
     </div>
 {{/each}}
 
