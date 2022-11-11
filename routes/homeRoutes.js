@@ -87,6 +87,7 @@ router.get('/logout', (req, res) => {
 //profile
 
 router.get("/users/:id", (req, res) => {
+
     if (!req.session.loggedIn) {
       return res.redirect(`/login`);
     }
@@ -104,5 +105,47 @@ router.get("/users/:id", (req, res) => {
         }
       })
   });
+  
+// add event
+router.get("/new-event",(req,res)=>{
+    if(!req.session.loggedIn){
+        return res.redirect(`/`)
+    }
+    User.findByPk(req.session.userId).then(foundUser=>{
+        if(!foundUser){
+            return res.redirect("/404")
+        }
+        const hbsUser = foundUser.toJSON();
+        console.log(hbsUser)
+            res.render("addEvent",hbsUser)
+    })
+})
+
+// shows user events
+// router.get("/users/:id", async (req, res) => {
+//   // if not logged in, redirect to login
+//   if (!req.session.loggedIn) {
+//     return res.redirect("/login");
+//   }
+//   // get all posts by user id
+//   try {
+//     const eventData = await Event.findAll({
+//       where: {
+//         userId: req.session.userId,
+//       },
+//       include: [User],
+//     });
+//     // serialize
+//     const events = eventData.map((post) => post.get({ plain: true }));
+
+//     res.render("profile", {
+//       events,
+//       loggedIn: true,
+//     });
+//   } catch (err) {
+//     res.redirect("login");
+//   }
+// });
+
 
 module.exports = router;
