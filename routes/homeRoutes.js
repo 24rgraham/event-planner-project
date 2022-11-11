@@ -87,22 +87,25 @@ router.get('/logout', (req, res) => {
 //profile
 
 router.get("/users/:id", (req, res) => {
-  if (!req.session.loggedIn) {
-    return res.redirect(`/login`);
-  }
-  User.findByPk(req.params.id)
-    .then((foundUser) => {
-      const hbsUser = foundUser.get({ plain: true });
-      console.log(hbsUser);
-      hbsUser.loggedIn = true;
-      hbsUser.userId = req.session.userId;
-      if (hbsUser.id === req.session.userId) {
-        hbsUser.isMyProfile = true;
-      }
-    })
-    .then(res.render("profile"));
-});
 
+    if (!req.session.loggedIn) {
+      return res.redirect(`/login`);
+    }
+    User.findByPk(req.params.id, {
+        include:[Event]
+      })
+      .then((foundUser) => {
+        const hbsUser = foundUser.get({ plain: true });
+        console.log(hbsUser);
+        hbsUser.loggedIn = true;
+        hbsUser.userId = req.session.userId;
+        if (hbsUser.id === req.session.userId) {
+          hbsUser.isMyProfile = true;
+          res.render("profile", hbsUser);
+        }
+      })
+  });
+  
 // add event
 router.get("/new-event",(req,res)=>{
     if(!req.session.loggedIn){
@@ -143,5 +146,6 @@ router.get("/new-event",(req,res)=>{
 //     res.redirect("login");
 //   }
 // });
+
 
 module.exports = router;
