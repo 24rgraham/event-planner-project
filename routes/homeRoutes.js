@@ -50,13 +50,6 @@ router.get("/event/:id", async (req, res) => {
   }
 });
 
-// router.get("/login", (req, res) => {
-//     if(req.session.logged_in) {
-//       return res.redirect("/profile")
-//     }
-//       res.render("login")
-//   })
-
 router.get("/login", (req, res) => {
   // login
   if (req.session.loggedIn) {
@@ -79,11 +72,16 @@ router.get("/signup", (req, res) => {
   });
 });
 
-router.get("/logout", (req, res) => {
-  if (req.session.logged_in) {
-    return res.redirect("/login");
-  }
-  res.render("login");
+router.get('/logout', (req, res) => {
+    // logout
+    if(!req.session.loggedIn){
+        res.redirect("/login")
+    } else if (req.session.loggedIn) {
+      req.session.destroy();
+      res.redirect("/")
+    } else {
+      res.status(404).end();
+    }
 });
 
 //profile
