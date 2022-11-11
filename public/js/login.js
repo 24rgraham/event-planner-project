@@ -8,7 +8,7 @@ loginForm.addEventListener("submit", e => {
         password : document.querySelector("#password-login").value
     }
 
-    fetch("/api/user/login", {
+    fetch("/api/users/login", {
         method: "POST",
         body: JSON.stringify(userObj),
         headers: {
@@ -23,6 +23,6 @@ loginForm.addEventListener("submit", e => {
             location.reload()
         }
     }).then(data => {
-        location.href = `/user/${data.id}`
+        location.href = `/users/${data.id}`
     })
 })

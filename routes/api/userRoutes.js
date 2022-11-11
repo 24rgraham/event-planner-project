@@ -73,12 +73,11 @@ router.post('/login',(req,res)=>{
 })
 
 //logout user
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     // logout
     if (req.session.loggedIn) {
-      req.session.destroy(() => {
-        res.status(204).end();
-      });
+      req.session.destroy();
+      res.redirect("/")
     } else {
       res.status(404).end();
     }
