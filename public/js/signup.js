@@ -21,20 +21,19 @@ signupForm.addEventListener("submit", e => {
     }).then (res => {
         if (res.ok) {
             alert("Sign Up Successful")
-            location.reload();
-        //    return res.redirect(`/`)
-        //    return res.json()
+               return res.json()
         } else {
             alert("Sign Up failed")
+            location.reload();
         }
     })
-    // .then(data=>{
-    //     location.href = `/users/${data.id}`
-    //     // res.json(user)
+    .then(data=>{
+        location.href = `/users/${data.id}`
+        // res.json(user)
     //     // console.log("UserObj: " + userObj)
     //     // console.log("user : " + user)
 
     //     // location.href = `/users/${id}`
     //     // location.href = `/`
-    // })
+    })
 })
