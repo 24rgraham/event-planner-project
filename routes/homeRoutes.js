@@ -24,7 +24,7 @@ router.get("/sessions", (req, res) => {
   res.json(req.session);
 });
 
-router.get("/event/id:", async (req, res) => {
+router.get("/event/:id", async (req, res) => {
   // Shows one event
   try {
     const eventData = await Event.findOne({
@@ -73,7 +73,10 @@ router.get("/signup", (req, res) => {
   if (req.session.loggedIn) {
     return res.redirect(`/users/${req.session.id}`);
   }
-  res.render("signup");
+  res.render("signup", {
+    loggedIn: false,
+    userId: null,
+  });
 });
 
 router.get("/logout", (req, res) => {
@@ -91,7 +94,7 @@ router.get("/users/:id", (req, res) => {
   }
   User.findByPk(req.params.id)
     .then((foundUser) => {
-      const hbsUser = foundUser.toJSON();
+      const hbsUser = foundUser.get({ plain: true });
       console.log(hbsUser);
       hbsUser.loggedIn = true;
       hbsUser.userId = req.session.userId;
@@ -103,29 +106,29 @@ router.get("/users/:id", (req, res) => {
 });
 
 // shows user events
-router.get("/users/:id", async (req, res) => {
-  // if not logged in, redirect to login
-  if (!req.session.loggedIn) {
-    return res.redirect("/login");
-  }
-  // get all posts by user id
-  try {
-    const eventData = await Event.findAll({
-      where: {
-        userId: req.session.userId,
-      },
-      include: [User],
-    });
-    // serialize
-    const events = eventData.map((post) => post.get({ plain: true }));
+// router.get("/users/:id", async (req, res) => {
+//   // if not logged in, redirect to login
+//   if (!req.session.loggedIn) {
+//     return res.redirect("/login");
+//   }
+//   // get all posts by user id
+//   try {
+//     const eventData = await Event.findAll({
+//       where: {
+//         userId: req.session.userId,
+//       },
+//       include: [User],
+//     });
+//     // serialize
+//     const events = eventData.map((post) => post.get({ plain: true }));
 
-    res.render("profile", {
-      events,
-      loggedIn: true,
-    });
-  } catch (err) {
-    res.redirect("login");
-  }
-});
+//     res.render("profile", {
+//       events,
+//       loggedIn: true,
+//     });
+//   } catch (err) {
+//     res.redirect("login");
+//   }
+// });
 
 module.exports = router;
