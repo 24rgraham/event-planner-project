@@ -103,6 +103,21 @@ router.get("/users/:id", (req, res) => {
     .then(res.render("profile"));
 });
 
+// add event
+router.get("/new-event",(req,res)=>{
+    if(!req.session.loggedIn){
+        return res.redirect(`/`)
+    }
+    User.findByPk(req.session.userId).then(foundUser=>{
+        if(!foundUser){
+            return res.redirect("/404")
+        }
+        const hbsUser = foundUser.toJSON();
+        console.log(hbsUser)
+            res.render("addEvent",hbsUser)
+    })
+})
+
 // shows user events
 // router.get("/users/:id", async (req, res) => {
 //   // if not logged in, redirect to login
