@@ -1,9 +1,15 @@
-<section class="card">
-  <!-- The contents of this card links to the gallery page using the gallery ID -->
+  {{!-- <!-- The contents of this card links to the gallery page using the gallery ID -->
   <h3><a href="/event/{{id}}">{{name}}</a></h3>
-  <h5>Event Creator: {{event_creator}}</h5>
+  <h5>Event Creator: </h5>
     <!-- The card contains the gallery name as the card header -->
     <p>{{date}}</p>
-    <p>{{time}}</p>
+    <p>{{time}}</p> --}}
   
-</section>
+
+<div class="card p-2 m-2" style="width: 18rem;">
+  <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a class="card-text" href="/event/{{id}}">{{name}}</a>
+    <p class="card-text">Hosted by: {{user.name}} <br> {{date}} <br> {{time}} </p>
+  </div>
+</div>

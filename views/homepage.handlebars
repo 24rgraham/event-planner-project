@@ -1,8 +1,14 @@
-<h1>Welcome home!</h1>
+<h1 class="text-center">Welcome home!</h1>
 
-<h3>All Events</h3>
+<h3 class="text-center">All Events</h3>
 
-{{#each events}}
-    {{> event-details }}
-{{/each}}
-
+<div class="container">
+    <div class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-4">
+        {{!-- <div class="d-flex justify-content-around card-group"> --}}
+            {{#each events}}
+            {{> event-details }}
+            {{/each}}
+        </div>
+        {{!-- </div> --}}
+</div>
+</div>

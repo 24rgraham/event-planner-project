@@ -1,26 +1,38 @@
 {{!-- Event takes in a name, date, time, location, and description --}}
 
-<div class="card">
+<div class="card p-3 m-3">
     <div class="card-header">
         <h2>{{name}}'s New Event</h2>
     </div>
     <form class="card-body" id="new-event-form">
-        <label for="event-title" class="form-label">Title</label>
-        <input name="event-title" type="text" id="event-title">
+        <div class="form-group">
+            <label for="event-title" class="form-label">Title</label>
+            <input name="event-title" class="form-control" type="text" id="event-title">
+        </div>
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            <label for="event-date" class="form-label">Date</label>
+            <input name="event-date" class="form-control" type="date" id="event-date" value="2022-11-01" min="2022-11-01" max="2024-01-01">
+        </div>
+</div>
+<div class="col">
+        <div class="form-group">
+            <label for="event-time" class="form-label">Time</label>
+            <input name="event-time" class="form-control" type="time" id="event-time">
+        </div>
+</div>
+</div>
+        <div class="form-group">
+            <label for="event-location" class="form-label">Location</label>
+            <input name="event-location" class="form-control" type="text" id="event-location">
+        </div>
+        <div class="form-group">
+            <label for="event-body" class="form-label">Description</label>
+            <textarea name="event-body" class="form-input"></textarea>
+        </div>
 
-        <label for="event-date" class="form-label">Date</label>
-        <input name="event-date" type="date" id="event-date" value="2022-11-01" min="2022-11-01" max="2024-01-01">
-
-        <label for="event-time" class="form-label">Time</label>
-        <input name="event-time" type="time" id="event-time">
-
-        <label for="event-location" class="form-label">Location</label>
-        <input name="event-location" type="text" id="event-location">
-
-        <label for="event-body" class="form-label">Description</label>
-        <textarea name="event-body" class="form-input"></textarea>
-
-        <button type="submit"class="btn">Create Event</button>
+        <button type="submit" class="btn">Create Event</button>
     </form>
 </div>
 
