@@ -3,9 +3,10 @@ const Event = require('./Event');
 const Invite = require('./Invite');
 
 User.hasMany(Event, {
-  foreignKey: 'user_id',
+  foreignKey: 'event_creator',
   onDelete: 'CASCADE'
 });
+
 Event.hasMany(Invite, {
   foreignKey: 'event_id',
   onDelete: 'CASCADE'
