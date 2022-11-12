@@ -103,6 +103,13 @@ router.get("/users/:id", (req, res) => {
     .then(res.render("profile"));
 });
 
+router.get("/calendar", (req,res)=>{
+  if(!req.session.loggedIn){
+    return res.redirect(`/login`);
+  }
+  res.render("calendar")
+})
+
 // shows user events
 // router.get("/users/:id", async (req, res) => {
 //   // if not logged in, redirect to login
