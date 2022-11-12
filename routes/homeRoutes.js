@@ -124,5 +124,11 @@ router.get("/new-event", (req, res) => {
     });
   });
 });
+router.get("/calendar", (req,res)=>{
+  if(!req.session.loggedIn){
+    return res.redirect(`/login`);
+  }
+  res.render("calendar")
+})
 
 module.exports = router;
