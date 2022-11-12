@@ -11,22 +11,42 @@
   </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Events!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav d-flex justify-content-end">
+      <a class="nav-link active" href="/">All Events <span class="sr-only">(current)</span></a>
+      {{#if loggedIn}}
+      <a class="nav-link" href="/users/{{userId}}">Your Events</a>
+      <a class="nav-link" href="/calendar">Calendar</a>
+      <a class="nav-link" href="/new-event">Create Event</a>
+      <a class="nav-link" href="/logout">Logout</a>
+      {{else}}
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/signup">Signup</a>
+      {{/if}}
+    </div>
+  </div>
+</nav>
 
-<header class="header">
+{{!-- <header class="header">
   <h1 class="logo"><a href="/">Event Planner</a></h1>
     <ul class="main-nav">
       <li></li><a href="/">Home</a></li>
       {{#if loggedIn}}
       <li><a href="api/users/logout">Logout</a></li>
       <li><a href="/new-event">Create Event</a></li>
-      <li><a href="/(TBD)">View Calendar</a></li>
-      <li><a href="/users/{{id}}">View Profile</a></li>
+      <li><a href="/calendar">View Calendar</a></li>
+      <li><a href="/users/{{id}}">View Profile{{session}}</a></li>
       {{else}}
       <li><a href="/login">Login</a></li>
       <li><a href="/signup">Sign Up</a></li>
       {{/if}}
     </ul>
-</header>
+</header> --}}
 
 <main>
   {{{body}}}

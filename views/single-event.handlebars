@@ -1,14 +1,18 @@
-    <div class = "card">
-   <h1>{{event.name}}</h1>
-   <h5>By: {{event_creator}}</h5>
+<div class="row justify-content-center">
+    <div class="card p-2 m-2">
+        <h1 class="text-center">{{event.name}}</h1>
 
-    <p>Join us on for {{event.name}}! We are going to have a BLAST and hope to see you there!</p>
-    <br>
-    <ul>
-        <li>Where: {{event.location}}</li>
-        <li>When: {{event.date}} at {{event.time}}</li>
-        <li>What: {{event.description}}</li>
-    </ul>
+        <br>
+        <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
+        <br>
+        <ul class="card-body">
+            <li class="card-text">{{event.description}}<br><br></li>
+            <li class="card-text">Host: {{user.name}}</li>
+            <li class="card-text">Where: {{event.location}}</li>
+            <li class="card-text">When: {{event.date}} at {{event.time}}</li>
+
+        </ul>
 
     </div>
 
+</div>
