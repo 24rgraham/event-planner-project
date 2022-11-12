@@ -4,8 +4,11 @@
     <div class = "card">
 
     <a href="/event/{{id}}"><h3>{{name}}</h3></a>
+    <h5>By: {{event_creator}}</h5>
 
     <p>Join us on {{date}} at {{time}} for an amazing time!</p>
+    <button class="deleteEvent" data-eventId="{{id}}">Delete Event</button>
+    <hr>
     </div>
 {{/each}}
 
