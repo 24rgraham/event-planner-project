@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { Event, User, Invite } = require("../models");
 
-
 //show all events - for homepage
 router.get("/", async (req, res) => {
   // Shows all events
@@ -9,13 +8,14 @@ router.get("/", async (req, res) => {
     const eventData = await Event.findAll({
       include: [User],
     });
-    console.log(eventData);
 
     // serialize
     const events = eventData.map((event) => event.get({ plain: true }));
+    // console.log(events);
     res.render("homepage", {
       events,
       loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -40,10 +40,11 @@ router.get("/event/:id", async (req, res) => {
     if (eventData) {
       // serialize
       const event = eventData.get({ plain: true });
-
+      console.log(event);
       res.render("single-event", {
         event,
         loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
       });
     } else {
       res.status(404).end();
@@ -75,52 +76,59 @@ router.get("/signup", (req, res) => {
   });
 });
 
-router.get('/logout', (req, res) => {
-    // logout
-    if(!req.session.loggedIn){
-        res.redirect("/login")
-    } else if (req.session.loggedIn) {
-      req.session.destroy();
-      res.redirect("/")
-    } else {
-      res.status(404).end();
-    }
+router.get("/logout", (req, res) => {
+  // logout
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+  } else if (req.session.loggedIn) {
+    req.session.destroy();
+    res.redirect("/");
+  } else {
+    res.status(404).end();
+  }
 });
 
 //profile
 router.get("/users/:id", (req, res) => {
-
-    if (!req.session.loggedIn) {
-      return res.redirect(`/login`);
+  if (!req.session.loggedIn) {
+    return res.redirect(`/login`);
+  }
+  User.findByPk(req.params.id, {
+    include: [Event],
+  }).then((foundUser) => {
+    const hbsUser = foundUser.get({ plain: true });
+    hbsUser.loggedIn = true;
+    hbsUser.userId = req.session.userId;
+    if (hbsUser.id === req.session.userId) {
+      hbsUser.isMyProfile = true;
+      res.render("profile", hbsUser);
     }
-    User.findByPk(req.params.id, {
-        include:[Event]
-      })
-      .then((foundUser) => {
-        const hbsUser = foundUser.get({ plain: true });
-        console.log(hbsUser);
-        hbsUser.loggedIn = true;
-        hbsUser.userId = req.session.userId;
-        if (hbsUser.id === req.session.userId) {
-          hbsUser.isMyProfile = true;
-          res.render("profile", hbsUser);
-        }
-      })
   });
-  
+});
+
 // add event
-router.get("/new-event",(req,res)=>{
-    if(!req.session.loggedIn){
-        return res.redirect(`/`)
+router.get("/new-event", (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.redirect(`/`);
+  }
+  User.findByPk(req.session.userId).then((foundUser) => {
+    if (!foundUser) {
+      return res.redirect("/404");
     }
-    User.findByPk(req.session.userId).then(foundUser=>{
-        if(!foundUser){
-            return res.redirect("/404")
-        }
-        const hbsUser = foundUser.toJSON();
-        console.log(hbsUser)
-            res.render("addEvent",hbsUser)
-    })
+    const hbsUser = foundUser.toJSON();
+    // console.log(hbsUser);
+    res.render("addEvent", {
+      hbsUser: hbsUser,
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+    });
+  });
+});
+router.get("/calendar", (req,res)=>{
+  if(!req.session.loggedIn){
+    return res.redirect(`/login`);
+  }
+  res.render("calendar")
 })
 
 module.exports = router;
