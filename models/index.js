@@ -6,6 +6,7 @@ User.hasMany(Event, {
   foreignKey: 'event_creator',
   onDelete: 'CASCADE'
 });
+
 Event.hasMany(Invite, {
   foreignKey: 'event_id',
   onDelete: 'CASCADE'

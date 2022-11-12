@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { Event, User, Invite } = require("../models");
 
+
+//show all events - for homepage
 router.get("/", async (req, res) => {
   // Shows all events
   try {
@@ -24,6 +26,7 @@ router.get("/sessions", (req, res) => {
   res.json(req.session);
 });
 
+//Show one event - for expanding event details
 router.get("/event/:id", async (req, res) => {
   // Shows one event
   try {
@@ -85,24 +88,26 @@ router.get('/logout', (req, res) => {
 });
 
 //profile
-
 router.get("/users/:id", (req, res) => {
-  if (!req.session.loggedIn) {
-    return res.redirect(`/login`);
-  }
-  User.findByPk(req.params.id)
-    .then((foundUser) => {
-      const hbsUser = foundUser.get({ plain: true });
-      console.log(hbsUser);
-      hbsUser.loggedIn = true;
-      hbsUser.userId = req.session.userId;
-      if (hbsUser.id === req.session.userId) {
-        hbsUser.isMyProfile = true;
-      }
-    })
-    .then(res.render("profile"));
-});
 
+    if (!req.session.loggedIn) {
+      return res.redirect(`/login`);
+    }
+    User.findByPk(req.params.id, {
+        include:[Event]
+      })
+      .then((foundUser) => {
+        const hbsUser = foundUser.get({ plain: true });
+        console.log(hbsUser);
+        hbsUser.loggedIn = true;
+        hbsUser.userId = req.session.userId;
+        if (hbsUser.id === req.session.userId) {
+          hbsUser.isMyProfile = true;
+          res.render("profile", hbsUser);
+        }
+      })
+  });
+  
 // add event
 router.get("/new-event",(req,res)=>{
     if(!req.session.loggedIn){
@@ -117,31 +122,5 @@ router.get("/new-event",(req,res)=>{
             res.render("addEvent",hbsUser)
     })
 })
-
-// shows user events
-// router.get("/users/:id", async (req, res) => {
-//   // if not logged in, redirect to login
-//   if (!req.session.loggedIn) {
-//     return res.redirect("/login");
-//   }
-//   // get all posts by user id
-//   try {
-//     const eventData = await Event.findAll({
-//       where: {
-//         userId: req.session.userId,
-//       },
-//       include: [User],
-//     });
-//     // serialize
-//     const events = eventData.map((post) => post.get({ plain: true }));
-
-//     res.render("profile", {
-//       events,
-//       loggedIn: true,
-//     });
-//   } catch (err) {
-//     res.redirect("login");
-//   }
-// });
 
 module.exports = router;
