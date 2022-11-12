@@ -112,6 +112,47 @@ router.get('/calendar',(req,res)=>{
   }
   res.render('calendar')
 })
+
+// render event on calendar
+
+router.get("/calendar/:id", async (req, res) => {
+    // Shows one event
+    try {
+      const eventData = await Event.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+  
+      if (eventData) {
+        // serialize
+        const hbsEvent = eventData.get({ plain: true });
+        console.log(hbsEvent)
+        res.render("calendar", hbsEvent);
+      } else {
+        res.status(404).end();
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+router.get("/calendar/:id",(req,res)=>{
+    if(!req.session.loggedIn){
+        return res.redirect(`/`)
+    }
+    User.findByPk(req.session.userId).then(foundUser=>{
+        if(!foundUser){
+            return res.redirect("/404")
+        }
+        const hbsUser = foundUser.toJSON();
+        console.log(hbsUser)
+            res.render("addEvent",hbsUser)
+    })
+})
+
+
+
 // shows user events
 // router.get("/users/:id", async (req, res) => {
 //   // if not logged in, redirect to login
