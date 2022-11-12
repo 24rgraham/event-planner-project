@@ -1,26 +1,31 @@
-<div class="card">
+<div class="card p-3 m-3 mx-200">
     {{!-- signup, name input, email input, password input, button to sign up --}}
 
     <div class="card-header">
         <h2>Sign Up</h2>
     </div>
-
     <form class="signup-form" class="card-body">
-        <div class="form-outline mb-4">
-            <input type="text" class="name-signup">
-            <label for="name-signup">Name</label>
+        <div class="form-group">
+            <div class="form-outline mb-4">
+                <label for="name-signup">Name</label>
+                <input type="text" class="name-signup form-control">
+            </div>
         </div>
-        <div class="form-outline mb-4">
-            <input type="text" class="email-signup">
-            <label for="email-signup">Email</label>
+        <div class="form-group">
+            <div class="form-outline mb-4">
+                <label for="email-signup">Email</label>
+                <input type="text" class="email-signup form-control">
+            </div>
         </div>
-        <div class="form-outline mb-4">
-            <input type="password" class="password-signup">
-            <label for="password-signup">Password</label>
+        <div class="form-group">
+            <div class="form-outline mb-4">
+                <label for="password-signup">Password</label>
+                <input type="password" class="password-signup form-control" aria-describedby="pwHelp">
+                <small id="pwHelp" class="form-text text-muted">Password must be at least 8 characters.</small>
+            </div>
         </div>
-        <button>Sign up</button>
+        <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
-
 </div>
 
 <script src="/js/signup.js"></script>
