@@ -1,7 +1,7 @@
 
 
 async function newEventHandler(e) {
-    // e.preventDefault();
+    e.preventDefault();
     console.log('hi');
     
 
@@ -36,11 +36,10 @@ async function newEventHandler(e) {
             "Content-Type" : "application/json"
         }
     })
-
+    console.log(res)
     if (res.ok) {
         alert(name + " was successfully created")
-        location.reload()
-        
+        location.replace("/users/" + event_creator);
     } else {
         alert("Failed to create event")
     }
