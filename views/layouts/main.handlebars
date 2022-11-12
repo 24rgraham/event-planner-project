@@ -13,14 +13,14 @@
 <body>
 
 <header class="header">
-  <h1 class="logo"><a href="/">Event Planner</a></h1>
+  <h1 class="logo">Event Planner</h1>
     <ul class="main-nav">
       <li></li><a href="/">Home</a></li>
       {{#if loggedIn}}
       <li><a href="api/users/logout">Logout</a></li>
       <li><a href="/new-event">Create Event</a></li>
-      <li><a href="/(TBD)">View Calendar</a></li>
-      <li><a href="/users/{{id}}">View Profile</a></li>
+      <li><a href="/calendar">View Calendar</a></li>
+      <li><a href="/users/{{userId}}">View Profile</a></li>
       {{else}}
       <li><a href="/login">Login</a></li>
       <li><a href="/signup">Sign Up</a></li>

@@ -13,7 +13,7 @@ Event.hasMany(Invite, {
 });
 
 Event.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'event_creator'
 });
 Invite.belongsTo(User, {
   foreignKey: 'user_id'
