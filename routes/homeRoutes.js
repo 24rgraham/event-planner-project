@@ -122,5 +122,11 @@ router.get("/new-event",(req,res)=>{
             res.render("addEvent",hbsUser)
     })
 })
+router.get("/calendar", (req,res)=>{
+  if(!req.session.loggedIn){
+    return res.redirect(`/login`);
+  }
+  res.render("calendar")
+})
 
 module.exports = router;
