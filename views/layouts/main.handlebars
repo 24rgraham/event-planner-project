@@ -14,13 +14,12 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Events!</a>
+  <a class="navbar-brand" href="/">Events!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav d-flex justify-content-end">
-      <a class="nav-link active" href="/">All Events <span class="sr-only">(current)</span></a>
       {{#if loggedIn}}
       <a class="nav-link" href="/users/{{userId}}">Your Events</a>
       <a class="nav-link" href="/calendar">Calendar</a>

@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 
     // serialize
     const events = eventData.map((event) => event.get({ plain: true }));
-    // console.log(events);
+    console.log(events);
     res.render("homepage", {
       events,
       loggedIn: req.session.loggedIn,
@@ -57,8 +57,8 @@ router.get("/event/:id", async (req, res) => {
 router.get("/login", (req, res) => {
   // login
   if (req.session.loggedIn) {
-    return res.redirect(`/users/${req.session.id}`);
-  }
+    return res.redirect(`/`);
+  } 
   res.render("login", {
     loggedIn: false,
     userId: null,
@@ -68,7 +68,7 @@ router.get("/login", (req, res) => {
 router.get("/signup", (req, res) => {
   // signup
   if (req.session.loggedIn) {
-    return res.redirect(`/users/${req.session.id}`);
+    return res.redirect(`/`);
   }
   res.render("signup", {
     loggedIn: false,
@@ -124,11 +124,24 @@ router.get("/new-event", (req, res) => {
     });
   });
 });
+
 router.get("/calendar", (req,res)=>{
   if(!req.session.loggedIn){
     return res.redirect(`/login`);
   }
-  res.render("calendar")
+  res.render("calendar", {
+    // hbsUser: hbsUser,
+    loggedIn: req.session.loggedIn,
+    userId: req.session.userId,
+  })
+})
+
+router.get("/404",(req,res)=>{
+    res.render("404")
+})
+
+router.get("*",(req,res)=>{
+    res.render("404")
 })
 
 module.exports = router;
