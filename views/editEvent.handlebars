@@ -1,0 +1,43 @@
+<h1>Edit Event Page!</h1>
+<div class="card p-3 m-3">
+    <div class="card-header">
+        <h2>Edit {{hbsUser.name}}'s Event</h2>
+    </div>
+    <form class="card-body" id="edit-event-form">
+        <div class="form-group">
+            <label for="event-title" class="form-label">Title</label>
+            <input name="event-title" class="form-control" type="text" id="event-title" placeholder="Title">
+    
+        </div>
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            <label for="event-date" class="form-label">Date</label>
+            <input name="event-date" class="form-control" type="date" id="event-date" value="2022-11-01" min="2022-11-01" max="2024-01-01" placeholder="Date">
+        </div>
+</div>
+<div class="col">
+        <div class="form-group">
+            <label for="event-time" class="form-label">Time</label>
+            <input name="event-time" class="form-control" type="time" id="event-time" placeholder="Time">
+        </div>
+</div>
+</div>
+        <div class="form-group">
+            <label for="event-location" class="form-label">Location</label>
+            <input name="event-location" class="form-control" type="text" id="event-location" placeholder="Location">
+        </div>
+        <div class="form-group">
+            <label for="event-body" class="form-label">Description</label>
+            <textarea name="event-body" class="form-control" rows="3" placeholder="Description"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Event</button>
+    </form>
+</div>
+
+<p id="user-name" style="display:none">{{hbsUser.id}}</p>
+
+<p id="user-event" style="display:none">{{userEvent}}</p>
+
+<script src="/js/editEvent.js"></script>

@@ -58,7 +58,7 @@ router.get("/login", (req, res) => {
   // login
   if (req.session.loggedIn) {
     return res.redirect(`/`);
-  } 
+  }
   res.render("login", {
     loggedIn: false,
     userId: null,
@@ -125,23 +125,47 @@ router.get("/new-event", (req, res) => {
   });
 });
 
-router.get("/calendar", (req,res)=>{
-  if(!req.session.loggedIn){
+//edit event
+router.get("/edit-event/:id", (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.redirect(`/`);
+  }
+  User.findByPk(req.session.userId, {
+    include: [Event],
+  }).then((foundUser) => {
+    if (!foundUser) {
+      return res.redirect("/404");
+    }
+    const hbsUser = foundUser.toJSON();
+    console.log(hbsUser);
+
+    res.render("editEvent", {
+      hbsUser: hbsUser,
+
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+    });
+  });
+});
+
+//render calendar
+router.get("/calendar", (req, res) => {
+  if (!req.session.loggedIn) {
     return res.redirect(`/login`);
   }
   res.render("calendar", {
     // hbsUser: hbsUser,
     loggedIn: req.session.loggedIn,
     userId: req.session.userId,
-  })
-})
+  });
+});
 
-router.get("/404",(req,res)=>{
-    res.render("404")
-})
+router.get("/404", (req, res) => {
+  res.render("404");
+});
 
-router.get("*",(req,res)=>{
-    res.render("404")
-})
+router.get("*", (req, res) => {
+  res.render("404");
+});
 
 module.exports = router;
