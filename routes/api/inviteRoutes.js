@@ -25,8 +25,18 @@ router.get('/:event/:response', async (req, res) => {
   }
 });
 
-// create an invite
+// get all invites matching event id and respnse status
+router.get('/:event', async (req, res) => {
+  try {
+    const invites = await Invite.findAll({ where: { event_id: req.params.event} });
+    res.status(200).json(invites)
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err);
+  }
+});
 
+// create an invite
 router.post('/', async (req, res) => {
     try{
       const invite = await Invite.create(req.body);

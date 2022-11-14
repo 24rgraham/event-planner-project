@@ -1,6 +1,11 @@
 <div class="row justify-content-center">
-    <div class="card p-2 m-2">
+    <div class="card p-2 m-2 col-md-6 col-12">
         <h1 class="text-center">{{event.name}}</h1>
+        <p id="event-id" style="display:none">{{event.id}}</p>
+        <p id="sessId" style="display:none">{{sessId}}</p>
+        <p id="userId" style="display:none">{{userId}}</p>
+
+
 
         <br>
         {{#if event_photo}}
@@ -14,10 +19,56 @@
             <li class="card-text">Host: {{event.user.name}}</li>
             <li class="card-text">Where: {{event.location}}</li>
             <li class="card-text">When: {{event.date}} at {{event.time}}</li>
-
+            <br>
+            <button type="button" id='goingbtn' class="btn btn-primary" data-toggle="modal" data-target="#goingModal">Going</button>
+            <button type="button" id='maybebtn' class="btn btn-secondary" data-toggle="modal" data-target="#maybeModal">Maybe</button>
         </ul>
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="goingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Going</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="name-signup">Enter your name:</label>
+                <input type="text" id="goingName" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="goingSave" class="btn btn-primary" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="maybeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Maybe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="name-signup">Enter your name:</label>
+                <input type="text" id="maybeName" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="maybeSave" class="btn btn-primary" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script> 
-<script src="/js/addEvent.js"></script>
+<script src="/js/singleEvent.js"></script>
+
