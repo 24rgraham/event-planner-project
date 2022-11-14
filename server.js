@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('handlebars-helpers')();
 
 
+const cloudinary = require('./config/connection');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 

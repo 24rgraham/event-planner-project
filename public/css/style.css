@@ -2,7 +2,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+	font-family: 'Concert One', cursive;
 }
+
+
 
 /* Navbar */
 body {
@@ -10,6 +13,7 @@ body {
 	line-height: 1.6;
 	margin: 0;
 	min-height: 100vh;
+
 }
 ul {
   margin: 0;
@@ -27,6 +31,7 @@ a {
 
 .main-nav {
 	margin-top: 5px;
+	
 }
 
 .logo,
@@ -55,6 +60,23 @@ a {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+.photo-to-edit{
+	display: flex;
+	justify-content: center;
+    margin-top: 2%;
+}
+
+.photo-to-edit img{
+	width: 100px;
+	height: 100px;
+	margin: 0 2% 0 0;
+}
+
+.photo-to-edit button{
+	height: 40px;
+	align-self: center;
 }
 
 @media (min-width: 769px) {

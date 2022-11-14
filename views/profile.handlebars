@@ -3,12 +3,16 @@
     <div class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-4">
         {{#each events}}
         <div class="card p-2 m-2" >
+            {{#if event_photo}}
+            <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{event_photo}}" class="card-img-top" alt="...">
+            {{else}}
             <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
+            {{/if}}
             <div class="card-body">
                 <a class="card-text" href="/event/{{id}}">{{name}}</a>
                 <p class="card-text"> {{moment date format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
-                <button class="editEvent btn border-danger text-danger" data-eventId="{{id}}">Edit Event</button>
-                <button class="deleteEvent btn border-danger text-danger" data-eventId="{{id}}">Delete Event</button>
+                <button class="editEvent btn mt-2 border-secondary text-secondary" data-eventId="{{id}}">Edit Event</button>
+                <button class="deleteEvent btn mt-2 border-danger text-danger" data-eventId="{{id}}">Delete Event</button>
             </div>
         </div>
         {{/each}}

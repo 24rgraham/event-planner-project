@@ -31,6 +31,7 @@ router.post('/', async (req,res) => {
             date: req.body.date,
             time: req.body.time,
             location: req.body.place,
+            event_photo: req.body.event_photo,
             description: req.body.description,
             event_creator: req.body.event_creator
         });
@@ -47,6 +48,7 @@ router.put('/:id', (req,res)=>{
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
+        event_photo: req.body.event_photo,
         description: req.body.description,
         event_creator: req.body.event_creator
     },
@@ -65,6 +67,28 @@ router.put('/:id', (req,res)=>{
         console.log(err);
         res.status(500).json({ err: err});
       });
+})
+
+//update event image
+router.put('/:id', (req,res)=>{
+  Event.update({
+      event_photo: req.body.event_photo,
+  },
+  {
+      where: {
+          id: req.params.id
+      }
+  })
+  .then((updatedPhoto)=> {
+      if(updatedPhoto[0] === 0) {
+          return res.status(404).json({msg: "no photo found"});
+        }
+        res.json(updatedPhoto)
+  })
+  .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err});
+    });
 })
 
 //delete
