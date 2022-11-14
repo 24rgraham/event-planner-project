@@ -51,7 +51,7 @@ editEvent.addEventListener("submit", async (e) => {
   const location = document.querySelector('input[name="event-location"]').value;
   const event_photo = body
   const description = document.querySelector(
-    'textarea[name="event-body"]'
+    'input[name="event-description"]'
   ).value;
   const edited_event = document.querySelector("#user-event").textContent;
   const event_creator = document.querySelector("#user-name").textContent;

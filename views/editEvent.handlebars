@@ -34,8 +34,8 @@
             <input name="event-location" class="form-control" type="text" id="event-location" value="{{userEvents.location}}">
         </div>
         <div class="form-group">
-            <label for="event-body" class="form-label">Description</label>
-            <textarea name="event-body" class="form-control" rows="3" placeholder="Please retype your event description"></textarea>
+            <label for="event-description" class="form-label">Description</label>
+            <input name="event-description" class="form-control" rows="3" type="text" value="{{userEvents.description}}">
         </div>
 
         <button type="submit" class="btn btn-primary">Update Event</button>
