@@ -16,9 +16,9 @@ editEvent.addEventListener("submit", async (e) => {
 
 
   const currentURL = window.location.href;
-  console.log(currentURL)
+//   console.log(currentURL)
   const idNum = currentURL.substring(currentURL.lastIndexOf('/') + 1);
-  console.log(idNum)
+//   console.log(idNum)
 
   const res = await fetch(`/api/events/${idNum}`, {
     method: "PUT",
@@ -37,7 +37,8 @@ editEvent.addEventListener("submit", async (e) => {
   //   console.log(res);
   if (res.ok) {
     alert(name + " was successfully edited");
-    location.replace(`/users/${event_creator}`);
+    window.location.replace("/users/" + event_creator);
+
   } else {
     alert("Failed to edit event");
   }
