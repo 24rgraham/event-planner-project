@@ -7,21 +7,28 @@
 
 
 
-        <br>
+    <br />
         {{#if event.event_photo}}
         <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{event.event_photo}}" class="card-img-top" alt="...">
         {{else}}
-        <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
+    <img src="https://placebear.com/300/200" class="card-img-top" alt="..." />
         {{/if}}
-        <br>
-        <ul class="card-body">
-            <li class="card-text">{{event.description}}<br><br></li>
-            <li class="card-text">Host: {{event.user.name}}</li>
-            <li class="card-text">Where: {{event.location}}</li>
-            <li class="card-text">When: {{event.date}} at {{event.time}}</li>
+    <br />
+    <ul class="card-body">
+      <li class="card-text">{{event.description}}<br /><br /></li>
+      <li class="card-text">Host: {{event.user.name}}</li>
+      <li class="card-text">Where: {{event.location}}</li>
+      <li class="card-text">When:
+        {{moment event.date format="dddd, MMMM Do YYYY"}}
+        at
+        {{moment event.time}}</li>
             <br>
             <button type="button" id='goingbtn' class="btn btn-primary" data-toggle="modal" data-target="#goingModal">Going</button>
             <button type="button" id='maybebtn' class="btn btn-secondary" data-toggle="modal" data-target="#maybeModal">Maybe</button>
+            <br>
+            <li class="card-text" id="goers">Goers:</li>
+            <br>
+            <li class="card-text" id="maybers">Maybers:</li>
         </ul>
     </div>
 </div>
