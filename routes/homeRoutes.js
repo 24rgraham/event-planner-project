@@ -26,6 +26,10 @@ router.get("/sessions", (req, res) => {
   res.json(req.session);
 });
 
+router.get("/sess", (req, res) => {
+  res.json(req.sessionID);
+});
+
 //Show one event - for expanding event details
 router.get("/event/:id", async (req, res) => {
   // Shows one event
@@ -45,6 +49,7 @@ router.get("/event/:id", async (req, res) => {
         event,
         loggedIn: req.session.loggedIn,
         userId: req.session.userId,
+        sessId: req.sessionID
       });
     } else {
       res.status(404).end();

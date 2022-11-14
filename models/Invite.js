@@ -33,6 +33,9 @@ Invite.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    sess_id: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
