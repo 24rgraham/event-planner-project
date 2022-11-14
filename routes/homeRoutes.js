@@ -137,11 +137,22 @@ router.get("/edit-event/:id", (req, res) => {
       return res.redirect("/404");
     }
     const hbsUser = foundUser.toJSON();
-    console.log(hbsUser);
+    console.log(hbsUser)
+    const userEvents = hbsUser.events;
+    console.log("user events: " + userEvents);
+    console.log(req.params.id)
+    let newArr = [];
+    for (let i=0; i<userEvents.length; i++){
+        if (userEvents[i].id == req.params.id) {
+            newArr.push(userEvents[i])
+        }
+    }
+    console.log(JSON.stringify(newArr[0])) 
+    // console.log(JSON.stringify(eventIds))
 
     res.render("editEvent", {
+    userEvents: newArr[0],
       hbsUser: hbsUser,
-
       loggedIn: req.session.loggedIn,
       userId: req.session.userId,
     });
