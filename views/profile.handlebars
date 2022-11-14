@@ -6,7 +6,7 @@
             <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
             <div class="card-body">
                 <a class="card-text" href="/event/{{id}}">{{name}}</a>
-                <p class="card-text"> {{date}} <br> {{time}} </p>
+                <p class="card-text"> {{moment date format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
                 <button class="editEvent btn border-danger text-danger" data-eventId="{{id}}">Edit Event</button>
                 <button class="deleteEvent btn border-danger text-danger" data-eventId="{{id}}">Delete Event</button>
             </div>
