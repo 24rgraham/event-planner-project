@@ -5,8 +5,6 @@ const sessId = document.querySelector("#sessId").textContent
 const userId = document.querySelector("#userId").textContent
 
 
-
-
 // hide buttons from logged in users and sessID users
 fetch(`/api/invites/` + eventId).then(function (response) {
 
@@ -22,7 +20,7 @@ fetch(`/api/invites/` + eventId).then(function (response) {
 
         if (rsvps.map(obj => {
             return obj.sess_id
-        }).includes(sessId) ||
+            }).includes(sessId) ||
             rsvps.map(obj => {
             return obj.invitee_id
             }).includes(userId)) {
@@ -42,18 +40,37 @@ fetch(`/api/invites/` + eventId + `/going`).then(function (response) {
             return obj.name
         })
         console.log(goingNames)
+
+        if(goingNames.length === 0){document.getElementById('goers').style.display = 'none'}
+        for (var i = 0; i < goingNames.length; i++) {
+            var thing = goingNames[i];
+        
+            var li = document.createElement("li");
+            li.textContent = thing;
+            li.setAttribute("class", "card-text");
+            document.getElementById('goers').appendChild(li);
+        }
     });
 });
 
 // display event maybeers
 fetch(`/api/invites/` + eventId + `/maybe`).then(function (response) {
     response.json().then(function (data) {
-        const going = data
-        console.log(going)
-        const goingNames = going.map(obj => {
+        const maybe = data
+        console.log(maybe)
+        const maybeNames = maybe.map(obj => {
             return obj.name
         })
-        console.log(goingNames)
+        console.log(maybeNames)
+
+        if(maybeNames.length === 0){document.getElementById('maybers').style.display = 'none'}
+        for (var i = 0; i < maybeNames.length; i++) {
+            var thing = maybeNames[i];
+            var li = document.createElement("li");
+            li.textContent = thing;
+            li.setAttribute("class", "card-text");
+            document.getElementById('maybers').appendChild(li);
+        }
     });
 });
 
