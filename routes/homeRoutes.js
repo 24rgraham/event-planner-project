@@ -142,6 +142,40 @@ router.get("/edit-event/:id", (req, res) => {
       return res.redirect("/404");
     }
     const hbsUser = foundUser.toJSON();
+    // console.log(hbsUser)
+    const userEvents = hbsUser.events;
+    // console.log("user events: " + userEvents);
+    // console.log(req.params.id)
+    let newArr = [];
+    for (let i=0; i<userEvents.length; i++){
+        if (userEvents[i].id == req.params.id) {
+            newArr.push(userEvents[i])
+        }
+    }
+    // console.log(JSON.stringify(newArr[0])) 
+    // console.log(JSON.stringify(eventIds))
+
+    res.render("editEvent", {
+    userEvents: newArr[0],
+      hbsUser: hbsUser,
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+    });
+  });
+});
+
+//edit image
+router.get("/edit-event/:id", (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.redirect(`/`);
+  }
+  User.findByPk(req.session.userId, {
+    include: [Event],
+  }).then((foundUser) => {
+    if (!foundUser) {
+      return res.redirect("/404");
+    }
+    const hbsUser = foundUser.toJSON();
     console.log(hbsUser)
     const userEvents = hbsUser.events;
     console.log("user events: " + userEvents);
@@ -152,11 +186,14 @@ router.get("/edit-event/:id", (req, res) => {
             newArr.push(userEvents[i])
         }
     }
-    console.log(JSON.stringify(newArr[0])) 
+
+    // console.log(newArr[0].event_photo)
+    console.log(JSON.stringify(newArr[0].event_photo)) 
+    const photoForEdits = JSON.stringify(newArr[0].event_photo)
     // console.log(JSON.stringify(eventIds))
 
     res.render("editEvent", {
-    userEvents: newArr[0],
+      photoToEdit: photoForEdits,
       hbsUser: hbsUser,
       loggedIn: req.session.loggedIn,
       userId: req.session.userId,

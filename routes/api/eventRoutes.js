@@ -69,6 +69,28 @@ router.put('/:id', (req,res)=>{
       });
 })
 
+//update event image
+router.put('/:id', (req,res)=>{
+  Event.update({
+      event_photo: req.body.event_photo,
+  },
+  {
+      where: {
+          id: req.params.id
+      }
+  })
+  .then((updatedPhoto)=> {
+      if(updatedPhoto[0] === 0) {
+          return res.status(404).json({msg: "no photo found"});
+        }
+        res.json(updatedPhoto)
+  })
+  .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err});
+    });
+})
+
 //delete
 router.delete('/:id', async (req, res) => {
     try {
