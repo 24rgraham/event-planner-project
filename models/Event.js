@@ -30,6 +30,10 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    event_photo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
