@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: obj.name,
             // start:`${obj.date}T${obj.time}`,
             start:obj.date,
-            url: `/events/${obj.id}`
+            url: `/event/${obj.id}`
           }
         })
         console.log(newArray)
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
-          initialDate: '1969-12-07',
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
