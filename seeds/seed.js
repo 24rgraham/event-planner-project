@@ -37,7 +37,7 @@ const userData = [
 const eventData = [
     {
         name: "Harry's half birthday party",
-        date: 2022-11-31,
+        date: "2022-11-31",
         time: "10:00",
         location: "Malfoy Manor",
         description: "Come celebrate my big day! Eat yourself to death with our death-eater cake! Polyjuice potion on the house!",
@@ -45,7 +45,7 @@ const eventData = [
     },
     {
         name: "Captain Jack Sparrow's Send-Off Bash",
-        date: 2022-11-25,
+        date: "2022-11-25",
         time: "1:00",
         location: "Tortuga",
         description: "Where's the rum gone? We bought it all up for my big going away sendoff! Where am I going? Davy Jones' locker!!",
