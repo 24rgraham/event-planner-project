@@ -1,5 +1,7 @@
 var goingbtn = document.getElementById('goingbtn')
 var maybebtn = document.getElementById('maybebtn')
+var changebtn = document.getElementById('changebtn')
+
 const eventId = document.getElementById('event-id').textContent;
 const sessId = document.querySelector("#sessId").textContent
 const userId = document.querySelector("#userId").textContent
@@ -10,23 +12,21 @@ fetch(`/api/invites/` + eventId).then(function (response) {
 
     response.json().then(function (data) {
         const rsvps = data
-        console.log(rsvps)
-
         console.log(
             rsvps.map(obj => {
                 return obj.sess_id
             }).includes(sessId)
         );
-
         if (rsvps.map(obj => {
             return obj.sess_id
-            }).includes(sessId) ||
+        }).includes(sessId) ||
             rsvps.map(obj => {
-            return obj.invitee_id
+                return obj.invitee_id
             }).includes(userId)) {
             goingbtn.style.display = 'none';
             maybebtn.style.display = 'none';
-        }
+        } else { changebtn.style.display = 'none' }
+
     });
 })
 
@@ -35,16 +35,15 @@ fetch(`/api/invites/` + eventId).then(function (response) {
 fetch(`/api/invites/` + eventId + `/going`).then(function (response) {
     response.json().then(function (data) {
         const going = data
-        console.log(going)
         const goingNames = going.map(obj => {
             return obj.name
         })
         console.log(goingNames)
 
-        if(goingNames.length === 0){document.getElementById('goers').style.display = 'none'}
+        if (goingNames.length === 0) { document.getElementById('goers').style.display = 'none' }
         for (var i = 0; i < goingNames.length; i++) {
             var thing = goingNames[i];
-        
+
             var li = document.createElement("li");
             li.textContent = thing;
             li.setAttribute("class", "card-text");
@@ -57,13 +56,10 @@ fetch(`/api/invites/` + eventId + `/going`).then(function (response) {
 fetch(`/api/invites/` + eventId + `/maybe`).then(function (response) {
     response.json().then(function (data) {
         const maybe = data
-        console.log(maybe)
         const maybeNames = maybe.map(obj => {
             return obj.name
         })
-        console.log(maybeNames)
-
-        if(maybeNames.length === 0){document.getElementById('maybers').style.display = 'none'}
+        if (maybeNames.length === 0) { document.getElementById('maybers').style.display = 'none' }
         for (var i = 0; i < maybeNames.length; i++) {
             var thing = maybeNames[i];
             var li = document.createElement("li");
@@ -80,6 +76,8 @@ const newGoing = document.querySelector("#goingSave");
 
 newGoing.addEventListener("click", e => {
     e.preventDefault();
+    console.log(document.querySelector("#goingName").value);
+    
     if (userId) {
         const inviteObj = {
             name: document.querySelector("#goingName").value,
@@ -88,8 +86,6 @@ newGoing.addEventListener("click", e => {
             response: "Going",
             sess_id: sessId
         }
-        console.log(JSON.stringify(inviteObj))
-
         fetch("/api/invites", {
             method: "POST",
             body: JSON.stringify(inviteObj),
@@ -98,6 +94,7 @@ newGoing.addEventListener("click", e => {
             }
         }).then(res => {
             if (res.ok) {
+                console.log('yes');
                 location.reload();
             } else {
                 alert("failed")
@@ -111,8 +108,6 @@ newGoing.addEventListener("click", e => {
             response: "Going",
             sess_id: sessId
         }
-        console.log(JSON.stringify(inviteObj))
-
         fetch("/api/invites", {
             method: "POST",
             body: JSON.stringify(inviteObj),
@@ -121,7 +116,8 @@ newGoing.addEventListener("click", e => {
             }
         }).then(res => {
             if (res.ok) {
-                location.reload()
+                console.log('yes');
+                location.reload();
             } else {
                 alert("failed")
                 location.reload();
@@ -135,6 +131,8 @@ const newMaybe = document.querySelector("#maybeSave");
 
 newMaybe.addEventListener("click", e => {
     e.preventDefault();
+    console.log(document.querySelector("#maybeName").value);
+
     if (userId) {
         const inviteObj = {
             name: document.querySelector("#maybeName").value,
@@ -143,7 +141,6 @@ newMaybe.addEventListener("click", e => {
             response: "Maybe",
             sess_id: sessId
         }
-        console.log(JSON.stringify(inviteObj))
 
         fetch("/api/invites", {
             method: "POST",
@@ -153,6 +150,7 @@ newMaybe.addEventListener("click", e => {
             }
         }).then(res => {
             if (res.ok) {
+                console.log('yes');
                 location.reload();
             } else {
                 alert("failed")
@@ -161,12 +159,11 @@ newMaybe.addEventListener("click", e => {
         })
     } else {
         const inviteObj = {
-            name: document.querySelector("#goingName").value,
+            name: document.querySelector("#maybeName").value,
             event_id: eventId,
             response: "Maybe",
             sess_id: sessId
         }
-        console.log(JSON.stringify(inviteObj))
 
         fetch("/api/invites", {
             method: "POST",
@@ -176,7 +173,8 @@ newMaybe.addEventListener("click", e => {
             }
         }).then(res => {
             if (res.ok) {
-                location.reload()
+                console.log('yes');
+                location.reload();
             } else {
                 alert("failed")
                 location.reload();
@@ -186,3 +184,52 @@ newMaybe.addEventListener("click", e => {
 })
 
 // update response
+changebtn.addEventListener("click", e => {
+    e.preventDefault();
+
+    fetch(`/api/invites/` + eventId).then(function (response) {
+        response.json().then(function (data) {
+            const rsvps = data
+            console.log(rsvps)
+
+            for (var i = 0; i < rsvps.length; i++) {
+                var invite = rsvps[i];
+
+                if (invite.sess_id === sessId) {
+                    console.log(invite.id);
+
+                    fetch(`/api/invites/` + invite.id, {
+                        method: "DELETE"
+                    }).then((res) => {
+                        if (res.ok) {
+                            console.log('yes');
+                        } else {
+                            alert("trumpet sound");
+                        }
+                    });
+                } else {
+                    console.log('nah');
+                }
+                
+                console.log(userId && invite.invitee_id === userId);
+                
+                if (userId && invite.invitee_id === userId) {
+                    console.log(invite.id);
+
+                    fetch(`/api/invites/` + invite.id, {
+                        method: "DELETE"
+                    }).then((res) => {
+                        if (res.ok) {
+                            console.log('yes');
+                        } else {
+                            alert("trumpet sound");
+                        }
+                    });
+                } else {
+                    console.log('nah');
+                }
+                location.reload();
+            }
+        })
+    })
+})
