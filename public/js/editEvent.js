@@ -1,4 +1,5 @@
 const editEvent = document.querySelector("#edit-event-form");
+const returnToProf = document.querySelector("#return-to-profile")
 
 const cloudName = `dqv6cj4bc`;
 const apiKey = `444617613757917`;
@@ -15,31 +16,15 @@ var widget = cloudinary.createUploadWidget(
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info.path);
         body = result.info.path;
-      }
+        const event_photo = body;
+       }
     }
 )
 
 document.getElementById("upload_widget").addEventListener("click", async function(e) {
     e.preventDefault();
     widget.open();
-  const event_photo = body;
-    const res = await fetch(`/api/edit-event/${idNum}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        event_photo
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    if (res.ok) {
-      alert("Image was successfully edited");
-      // window.location.replace("/users/" + event_creator);
-  
-    } else {
-      alert("Failed to edit event");
-    }
 }, false);
 
 editEvent.addEventListener("submit", async (e) => {
@@ -55,12 +40,6 @@ editEvent.addEventListener("submit", async (e) => {
   ).value;
   const edited_event = document.querySelector("#user-event").textContent;
   const event_creator = document.querySelector("#user-name").textContent;
-
-
-  
-//   console.log(currentURL)
-
-//   console.log(idNum)
 
   const res = await fetch(`/api/events/${idNum}`, {
     method: "PUT",
@@ -79,10 +58,17 @@ editEvent.addEventListener("submit", async (e) => {
   });
   //   console.log(res);
   if (res.ok) {
-    alert(name + " was successfully edited");
-    window.location.replace("/users/" + event_creator);
+    // alert(name + " was successfully edited");
+    window.location.reload();
+
 
   } else {
     alert("Failed to edit event");
   }
 });
+
+returnToProf.addEventListener("click", e => {
+  e.preventDefault();
+  const event_creator = document.querySelector("#user-name").textContent;
+  window.location.replace("/users/" + event_creator);
+})
