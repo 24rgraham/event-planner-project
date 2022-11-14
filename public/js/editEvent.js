@@ -2,7 +2,8 @@ const editEvent = document.querySelector("#edit-event-form");
 
 const cloudName = `dqv6cj4bc`;
 const apiKey = `444617613757917`;
-
+const currentURL = window.location.href;
+const idNum = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 let body;
 
 var widget = cloudinary.createUploadWidget(
@@ -18,9 +19,27 @@ var widget = cloudinary.createUploadWidget(
     }
 )
 
-document.getElementById("upload_widget").addEventListener("click", function(e) {
+document.getElementById("upload_widget").addEventListener("click", async function(e) {
     e.preventDefault();
     widget.open();
+  const event_photo = body;
+    const res = await fetch(`/api/edit-event/${idNum}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        event_photo
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.ok) {
+      alert("Image was successfully edited");
+      // window.location.replace("/users/" + event_creator);
+  
+    } else {
+      alert("Failed to edit event");
+    }
 }, false);
 
 editEvent.addEventListener("submit", async (e) => {
@@ -38,9 +57,9 @@ editEvent.addEventListener("submit", async (e) => {
   const event_creator = document.querySelector("#user-name").textContent;
 
 
-  const currentURL = window.location.href;
+  
 //   console.log(currentURL)
-  const idNum = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+
 //   console.log(idNum)
 
   const res = await fetch(`/api/events/${idNum}`, {

@@ -33,5 +33,6 @@
     "node": "^19.0.1",
     "sequelize": "^6.3.5"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {}
 }

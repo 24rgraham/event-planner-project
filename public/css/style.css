@@ -62,6 +62,23 @@ a {
 	border-radius: 5px;
 }
 
+.photo-to-edit{
+	display: flex;
+	justify-content: center;
+    margin-top: 2%;
+}
+
+.photo-to-edit img{
+	width: 100px;
+	height: 100px;
+	margin: 0 2% 0 0;
+}
+
+.photo-to-edit button{
+	height: 40px;
+	align-self: center;
+}
+
 @media (min-width: 769px) {
 	.header,
 	.main-nav {
