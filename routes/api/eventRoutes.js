@@ -31,6 +31,7 @@ router.post('/', async (req,res) => {
             date: req.body.date,
             time: req.body.time,
             location: req.body.place,
+            event_photo: req.body.event_photo,
             description: req.body.description,
             event_creator: req.body.event_creator
         });
@@ -47,6 +48,7 @@ router.put('/:id', (req,res)=>{
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
+        event_photo: req.body.event_photo,
         description: req.body.description,
         event_creator: req.body.event_creator
     },
