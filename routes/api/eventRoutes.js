@@ -52,6 +52,17 @@ router.get('/', (req, res) => {
   })
 })
 
+  //get all public
+  router.get('/public',(req,res)=>{
+    Event.findAll({
+
+    }).then(eventData=>{
+        res.json(eventData)
+    }).catch(err=>{
+        res.status(500).json({msg:"An error has occurred",err})
+    })
+  })
+
 //get one event
 router.get('/:id', (req, res) => {
   Event.findByPk(req.params.id)
@@ -64,34 +75,36 @@ router.get('/:id', (req, res) => {
 })
 
 //create event
-router.post('/', async (req, res) => {
-  try {
-    const newEvent = await Event.create({
-      name: req.body.name,
-      date: req.body.date,
-      time: req.body.time,
-      location: req.body.place,
-      event_photo: req.body.event_photo,
-      description: req.body.description,
-      event_creator: req.body.event_creator
-    });
-    res.status(200).json(newEvent)
-  } catch (err) {
-    res.status(400).json(err);
-  }
+router.post('/', async (req,res) => {
+    try {
+        const newEvent = await Event.create({
+            name: req.body.name,
+            date: req.body.date,
+            time: req.body.time,
+            location: req.body.place,
+            event_photo: req.body.event_photo,
+            description: req.body.description,
+            isPrivate: req.body.isPrivate,
+            event_creator: req.body.event_creator
+        });
+        res.status(200).json(newEvent)
+    } catch (err) {
+        res.status(400).json(err);
+    } 
 })
 
 //update event
-router.put('/:id', (req, res) => {
-  Event.update({
-    name: req.body.name,
-    date: req.body.date,
-    time: req.body.time,
-    location: req.body.location,
-    event_photo: req.body.event_photo,
-    description: req.body.description,
-    event_creator: req.body.event_creator
-  },
+router.put('/:id', (req,res)=>{
+    Event.update({
+        name: req.body.name,
+        date: req.body.date,
+        time: req.body.time,
+        location: req.body.location,
+        event_photo: req.body.event_photo,
+        description: req.body.description,
+        isPrivate: req.body.isPrivate,
+        event_creator: req.body.event_creator
+    },
     {
       where: {
         id: req.params.id

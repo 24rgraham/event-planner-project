@@ -6,6 +6,9 @@ router.get("/", async (req, res) => {
   // Shows all events
   try {
     const eventData = await Event.findAll({
+      where: {
+        isPrivate: false,
+      },
       include: [User],
     });
 
@@ -49,7 +52,7 @@ router.get("/event/:id", async (req, res) => {
         event,
         loggedIn: req.session.loggedIn,
         userId: req.session.userId,
-        sessId: req.sessionID
+        sessId: req.sessionID,
       });
     } else {
       res.status(404).end();
@@ -149,10 +152,10 @@ router.get("/edit-event/:id", (req, res) => {
     let newArr = [];
     for (let i = 0; i < userEvents.length; i++) {
       if (userEvents[i].id == req.params.id) {
-        newArr.push(userEvents[i])
+        newArr.push(userEvents[i]);
       }
     }
-    // console.log(JSON.stringify(newArr[0])) 
+    // console.log(JSON.stringify(newArr[0]))
     // console.log(JSON.stringify(eventIds))
 
     res.render("editEvent", {
@@ -163,7 +166,6 @@ router.get("/edit-event/:id", (req, res) => {
     });
   });
 });
-
 
 //render calendar
 router.get("/calendar", (req, res) => {
