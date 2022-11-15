@@ -1,16 +1,21 @@
-<h1>This is my profile Welcome back, {{name}}</h1>
+<h1 class="text-center">This is my profile Welcome back, {{name}}</h1>
+<div class="container">
+    <div class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-4">
+        {{#each events}}
+        <div class="card p-2 m-2" >
+            {{#if event_photo}}
+            <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{event_photo}}" class="card-img-top" alt="...">
+            {{else}}
+            <img src="https://placebear.com/300/200" class="card-img-top" alt="...">
+            {{/if}}
+            <div class="card-body">
+                <a class="card-text" href="/event/{{id}}">{{name}}</a>
+                <p class="card-text"> {{moment date format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
+                <button class="editEvent btn mt-2 border-secondary text-secondary" data-eventId="{{id}}">Edit Event</button>
+                <button class="deleteEvent btn mt-2 border-danger text-danger" data-eventId="{{id}}">Delete Event</button>
+            </div>
+        </div>
+        {{/each}}
 
-{{#each events}}
-    <div class = "card">
 
-    <a href="/event/{{id}}"><h3>{{name}}</h3></a>
-    <h5>By: {{event_creator}}</h5>
-
-    <p>Join us on {{date}} at {{time}} for an amazing time!</p>
-    <button class="deleteEvent" data-eventId="{{id}}">Delete Event</button>
-    <hr>
-    </div>
-{{/each}}
-
-
-<script src="/js/profile.js"></script>
+        <script src="/js/profile.js"></script>

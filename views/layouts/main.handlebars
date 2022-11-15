@@ -3,38 +3,76 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/assets/trex.jpg">
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet"
+    >
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+    />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>    <link href="/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>Event Planner</title>
   </head>
 
-<body>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Events!</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav d-flex justify-content-end">
+          {{#if loggedIn}}
+            <a class="nav-link" href="/users/{{userId}}">Your Events</a>
+            <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
+            <a class="nav-link" href="/calendar">Calendar</a>
+            <a class="nav-link" href="/new-event">Create Event</a>
+            <a class="nav-link" href="/logout">Logout</a>
+          {{else}}
+            <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/signup">Signup</a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
 
-<header class="header">
-  <h1 class="logo"><a href="/">Event Planner</a></h1>
-    <ul class="main-nav">
-      <li></li><a href="/">Home</a></li>
-      {{#if loggedIn}}
-      <li><a href="api/users/logout">Logout</a></li>
-      <li><a href="/new-event">Create Event</a></li>
-      <li><a href="/(TBD)">View Calendar</a></li>
-      <li><a href="/users/{{id}}">View Profile</a></li>
-      {{else}}
-      <li><a href="/login">Login</a></li>
-      <li><a href="/signup">Sign Up</a></li>
-      {{/if}}
-    </ul>
-</header>
+    <main>
+      {{{body}}}
+    </main>
 
-<main>
-  {{{body}}}
-</main>
+  </body>
 
-</body>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+  ></script>
 </html>

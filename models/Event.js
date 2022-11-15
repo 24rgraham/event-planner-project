@@ -30,9 +30,18 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    event_photo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    isPrivate: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     },
     event_creator: {
       type: DataTypes.INTEGER,
