@@ -1,7 +1,9 @@
 const cloudName = `dqv6cj4bc`;
 const apiKey = `444617613757917`;
+const privateEvent = document.querySelector("#private-checkbox")
 
 let body;
+let isPrivate;
 
 var widget = cloudinary.createUploadWidget(
   {
@@ -52,12 +54,13 @@ async function newEventHandler(e) {
       place,
       event_photo,
       description,
+      isPrivate,
       event_creator,
     }),
     headers: {
-      "Content-Type": "application/json",
+        "Content-Type": "application/json",
     },
-  });
+});
   console.log(res);
   if (res.ok) {
     alert(name + " was successfully created");
@@ -67,6 +70,14 @@ async function newEventHandler(e) {
   }
 }
 
-document
-  .querySelector("#new-event-form")
-  .addEventListener("submit", newEventHandler);
+  privateEvent.addEventListener("change", e=> {
+    if (e.currentTarget.checked) {
+        console.log("private")
+        isPrivate = true;
+    } else {
+        console.log("public")
+        isPrivate = false;
+    }
+  })
+
+  document.querySelector("#new-event-form").addEventListener("submit", newEventHandler);

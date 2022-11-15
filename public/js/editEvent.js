@@ -5,7 +5,9 @@ const cloudName = `dqv6cj4bc`;
 const apiKey = `444617613757917`;
 const currentURL = window.location.href;
 const idNum = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+const privateEvent = document.querySelector("#private-checkbox")
 let body;
+let isPrivate;
 
 var widget = cloudinary.createUploadWidget(
     {
@@ -50,6 +52,7 @@ editEvent.addEventListener("submit", async (e) => {
       location,
       event_photo,
       description,
+      isPrivate,
       event_creator,
     }),
     headers: {
@@ -60,12 +63,20 @@ editEvent.addEventListener("submit", async (e) => {
   if (res.ok) {
     // alert(name + " was successfully edited");
     window.location.reload();
-
-
   } else {
     alert("Failed to edit event");
   }
 });
+
+privateEvent.addEventListener("change", e=> {
+  if (e.currentTarget.checked) {
+      console.log("private")
+      isPrivate = true;
+  } else {
+      console.log("public")
+      isPrivate = false;
+  }
+})
 
 returnToProf.addEventListener("click", e => {
   e.preventDefault();
