@@ -47,10 +47,12 @@
         <div class="navbar-nav d-flex justify-content-end">
           {{#if loggedIn}}
             <a class="nav-link" href="/users/{{userId}}">Your Events</a>
+            <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
             <a class="nav-link" href="/calendar">Calendar</a>
             <a class="nav-link" href="/new-event">Create Event</a>
             <a class="nav-link" href="/logout">Logout</a>
           {{else}}
+            <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
             <a class="nav-link" href="/login">Login</a>
             <a class="nav-link" href="/signup">Signup</a>
           {{/if}}

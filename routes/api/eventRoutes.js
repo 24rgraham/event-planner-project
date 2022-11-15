@@ -1,16 +1,56 @@
 const router = require('express').Router();
-const { User, Event} = require('../../models');
+const { User, Event, Invite } = require('../../models');
+
+router.get('/rsvp', (req, res) => {
+  if (req.session.loggedIn) {
+    Invite.findAll({
+      where: {
+        invitee_id: req.session.userId
+      },
+      include: [Event],
+    }).then((foundInvite) => {
+      if (!foundInvite) {
+        return res.redirect("/404");
+      }
+      const inviteEvents = foundInvite.map((invite) => invite.get({ plain: true }));
+      console.log(inviteEvents)
+      let events = [];
+      for (let i = 0; i < inviteEvents.length; i++) {
+        events.push(inviteEvents[i].event)
+      }
+      res.json(events)
+    })
+  } else {
+    Invite.findAll({
+      where: {
+        sess_id: req.sessionID
+      },
+      include: [Event],
+    }).then((foundInvite) => {
+      if (!foundInvite) {
+        return res.redirect("/404");
+      }
+      const inviteEvents = foundInvite.map((invite) => invite.get({ plain: true }));
+      console.log(inviteEvents)
+      let events = [];
+      for (let i = 0; i < inviteEvents.length; i++) {
+        events.push(inviteEvents[i].event)
+      }
+      res.json(events)
+    })
+  }
+})
 
 //get all
-router.get('/',(req,res)=>{
-    Event.findAll({
-        // include:[User]
-    }).then(eventData=>{
-        res.json(eventData)
-    }).catch(err=>{
-        res.status(500).json({msg:"An error has occurred",err})
-    })
+router.get('/', (req, res) => {
+  Event.findAll({
+    // include:[User]
+  }).then(eventData => {
+    res.json(eventData)
+  }).catch(err => {
+    res.status(500).json({ msg: "An error has occurred", err })
   })
+})
 
   //get all public
   router.get('/public',(req,res)=>{
@@ -24,14 +64,14 @@ router.get('/',(req,res)=>{
   })
 
 //get one event
-router.get('/:id', (req,res) => {
-    Event.findByPk(req.params.id)
-    .then((event)=>{
-        res.json(event)
-    }).catch ((err) => {
-        console.log(err);
-        res.status(500).json({err:err})
-      })
+router.get('/:id', (req, res) => {
+  Event.findByPk(req.params.id)
+    .then((event) => {
+      res.json(event)
+    }).catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err })
+    })
 })
 
 //create event
@@ -66,20 +106,20 @@ router.put('/:id', (req,res)=>{
         event_creator: req.body.event_creator
     },
     {
-        where: {
-            id: req.params.id
-        }
+      where: {
+        id: req.params.id
+      }
     })
-    .then((updatedEvent)=> {
-        if(updatedEvent[0] === 0) {
-            return res.status(404).json({msg: "no event found"});
-          }
-          res.json(updatedEvent)
+    .then((updatedEvent) => {
+      if (updatedEvent[0] === 0) {
+        return res.status(404).json({ msg: "no event found" });
+      }
+      res.json(updatedEvent)
     })
     .catch((err) => {
-        console.log(err);
-        res.status(500).json({ err: err});
-      });
+      console.log(err);
+      res.status(500).json({ err: err });
+    });
 })
 
 //delete
@@ -90,7 +130,7 @@ router.delete('/:id', async (req, res) => {
           id: req.params.id
         }
       })
-  
+
       if(!event) {
         return res.status(400).json({message: "No event"})
       }
@@ -98,6 +138,6 @@ router.delete('/:id', async (req, res) => {
     } catch (err) {
       console.log(err)
     }
-  });
+});
 
 module.exports = router;
