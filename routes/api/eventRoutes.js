@@ -12,6 +12,17 @@ router.get('/',(req,res)=>{
     })
   })
 
+  //get all public
+  router.get('/public',(req,res)=>{
+    Event.findAll({
+
+    }).then(eventData=>{
+        res.json(eventData)
+    }).catch(err=>{
+        res.status(500).json({msg:"An error has occurred",err})
+    })
+  })
+
 //get one event
 router.get('/:id', (req,res) => {
     Event.findByPk(req.params.id)
@@ -33,6 +44,7 @@ router.post('/', async (req,res) => {
             location: req.body.place,
             event_photo: req.body.event_photo,
             description: req.body.description,
+            isPrivate: req.body.isPrivate,
             event_creator: req.body.event_creator
         });
         res.status(200).json(newEvent)
@@ -50,6 +62,7 @@ router.put('/:id', (req,res)=>{
         location: req.body.location,
         event_photo: req.body.event_photo,
         description: req.body.description,
+        isPrivate: req.body.isPrivate,
         event_creator: req.body.event_creator
     },
     {

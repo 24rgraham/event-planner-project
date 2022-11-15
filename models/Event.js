@@ -38,6 +38,11 @@ Event.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    isPrivate: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
     event_creator: {
       type: DataTypes.INTEGER,
       references: {

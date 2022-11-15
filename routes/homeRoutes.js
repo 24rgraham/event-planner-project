@@ -6,6 +6,9 @@ router.get("/", async (req, res) => {
   // Shows all events
   try {
     const eventData = await Event.findAll({
+      where: {
+        isPrivate: false,
+      },
       include: [User],
     });
 
@@ -49,7 +52,7 @@ router.get("/event/:id", async (req, res) => {
         event,
         loggedIn: req.session.loggedIn,
         userId: req.session.userId,
-        sessId: req.sessionID
+        sessId: req.sessionID,
       });
     } else {
       res.status(404).end();
@@ -147,16 +150,16 @@ router.get("/edit-event/:id", (req, res) => {
     // console.log("user events: " + userEvents);
     // console.log(req.params.id)
     let newArr = [];
-    for (let i=0; i<userEvents.length; i++){
-        if (userEvents[i].id == req.params.id) {
-            newArr.push(userEvents[i])
-        }
+    for (let i = 0; i < userEvents.length; i++) {
+      if (userEvents[i].id == req.params.id) {
+        newArr.push(userEvents[i]);
+      }
     }
-    // console.log(JSON.stringify(newArr[0])) 
+    // console.log(JSON.stringify(newArr[0]))
     // console.log(JSON.stringify(eventIds))
 
     res.render("editEvent", {
-    userEvents: newArr[0],
+      userEvents: newArr[0],
       hbsUser: hbsUser,
       loggedIn: req.session.loggedIn,
       userId: req.session.userId,
@@ -188,7 +191,7 @@ router.get("/edit-event/:id", (req, res) => {
 //     }
 
 //     // console.log(newArr[0].event_photo)
-//     console.log(JSON.stringify(newArr[0].event_photo)) 
+//     console.log(JSON.stringify(newArr[0].event_photo))
 //     const photoForEdits = JSON.stringify(newArr[0].event_photo)
 //     // console.log(JSON.stringify(eventIds))
 
