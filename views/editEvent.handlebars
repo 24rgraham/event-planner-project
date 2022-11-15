@@ -26,7 +26,7 @@
         <div class="form-group">
             <div class="photo-to-edit">
             <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{userEvents.event_photo}}" class="card-img-top" alt="...">
-            <button class="btn btn-primary" id="upload_widget">Update Image</button>
+            <button class="btn btn-primary" id="upload_widget">Upload New Image</button>
             </div>
         </div>
         <div class="form-group">
@@ -38,7 +38,10 @@
             <input name="event-description" class="form-control" rows="3" type="text" value="{{userEvents.description}}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Event</button>
+        <div class="d-flex flex-column  align-items-center">
+        <button type="submit" class="btn btn-primary m-2 col-6">Preview Changes</button>
+        <button id="return-to-profile" type="submit" class="btn btn-primary m-2 col-6">Update and Return to Profile</button>
+        </div>
     </form>
 </div>
 
