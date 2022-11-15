@@ -43,12 +43,12 @@ editEvent.addEventListener("submit", async (e) => {
   e.preventDefault();
   //   console.log("PREVENTED!");
   const name = document.querySelector('input[name="event-title"]').value;
-  const date = document.querySelector('input[name="event-date"]').value;
+  const eventDate = document.querySelector('input[name="event-date"]').value;
   const time = document.querySelector('input[name="event-time"]').value;
   const location = document.querySelector('input[name="event-location"]').value;
   const event_photo = body
   const description = document.querySelector(
-    'input[name="event-description"]'
+    'textArea[name="event-description"]'
   ).value;
   const edited_event = document.querySelector("#user-event").textContent;
   const event_creator = document.querySelector("#user-name").textContent;
@@ -57,7 +57,7 @@ editEvent.addEventListener("submit", async (e) => {
     method: "PUT",
     body: JSON.stringify({
       name,
-      date,
+      eventDate,
       time,
       location,
       event_photo,
@@ -93,7 +93,7 @@ returnToProf.addEventListener("click", async e => {
   e.preventDefault();
 
   const name = document.querySelector('input[name="event-title"]').value;
-  const date = document.querySelector('input[name="event-date"]').value;
+  const eventDate = document.querySelector('input[name="event-date"]').value;
   const time = document.querySelector('input[name="event-time"]').value;
   const location = document.querySelector('input[name="event-location"]').value;
   const event_photo = body
@@ -107,7 +107,7 @@ returnToProf.addEventListener("click", async e => {
     method: "PUT",
     body: JSON.stringify({
       name,
-      date,
+      eventDate,
       time,
       location,
       event_photo,

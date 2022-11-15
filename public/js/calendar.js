@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const newArray = eventData.map(obj => {
         return {
           title: obj.name,
-          start: `${obj.date}T${obj.time}`,
+          start: `${obj.eventDate}T${obj.time}`,
           // start:obj.date,
           url: `/event/${obj.id}`
         }

@@ -169,9 +169,6 @@ router.get("/edit-event/:id", (req, res) => {
 
 //render calendar
 router.get("/calendar", (req, res) => {
-  if (!req.session.loggedIn) {
-    return res.redirect(`/login`);
-  }
   res.render("calendar", {
     // hbsUser: hbsUser,
     loggedIn: req.session.loggedIn,
