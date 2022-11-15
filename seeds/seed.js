@@ -41,17 +41,17 @@ const eventData = [
         time: "10:00",
         location: "Malfoy Manor",
         description: "Come celebrate my big day! Eat yourself to death with our death-eater cake! Polyjuice potion on the house!",
-        isPrivate: true,
-        event_creator: 5
+        isPrivate: false,
+        event_creator: 4
     },
     {
         name: "Captain Jack Sparrow's Send-Off Bash",
         date: "2022-11-25",
-        time: "1:00",
+        time: "01:00",
         location: "Tortuga",
         description: "Where's the rum gone? We bought it all up for my big going away sendoff! Where am I going? Davy Jones' locker!!",
         isPrivate: false,
-        event_creator: 3
+        event_creator: 4
     },
 ]
 
