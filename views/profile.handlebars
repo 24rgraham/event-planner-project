@@ -10,7 +10,7 @@
             {{/if}}
             <div class="card-body">
                 <a class="card-text" href="/event/{{id}}">{{name}}</a>
-                <p class="card-text"> {{moment date format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
+                <p class="card-text"> {{moment eventDate format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
                 <button class="editEvent btn mt-2 border-secondary text-secondary" data-eventId="{{id}}">Edit Event</button>
                 <button class="deleteEvent btn mt-2 border-danger text-danger" data-eventId="{{id}}">Delete Event</button>
             </div>

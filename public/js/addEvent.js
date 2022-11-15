@@ -33,7 +33,7 @@ async function newEventHandler(e) {
   console.log("hi");
 
   const name = document.querySelector('input[name="event-title"]').value;
-  const date = document.querySelector('input[name="event-date"]').value;
+  const eventDate = document.querySelector('input[name="event-date"]').value;
   const time = document.querySelector('input[name="event-time"]').value;
   const place = document.querySelector('input[name="event-location"]').value;
   const event_photo = body;
@@ -49,7 +49,7 @@ async function newEventHandler(e) {
     method: "POST",
     body: JSON.stringify({
       name,
-      date,
+      eventDate,
       time,
       place,
       event_photo,

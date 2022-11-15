@@ -79,7 +79,7 @@ router.post('/', async (req,res) => {
     try {
         const newEvent = await Event.create({
             name: req.body.name,
-            date: req.body.date,
+            eventDate: req.body.eventDate,
             time: req.body.time,
             location: req.body.place,
             event_photo: req.body.event_photo,
@@ -97,7 +97,7 @@ router.post('/', async (req,res) => {
 router.put('/:id', (req,res)=>{
     Event.update({
         name: req.body.name,
-        date: req.body.date,
+        eventDate: req.body.eventDate,
         time: req.body.time,
         location: req.body.location,
         event_photo: req.body.event_photo,
