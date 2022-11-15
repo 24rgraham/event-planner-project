@@ -29,6 +29,8 @@
     <title>Event Planner</title>
   </head>
 
+  <div id="background">
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Events!</a>
@@ -50,11 +52,11 @@
             <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
             <a class="nav-link" href="/calendar">Calendar</a>
             <a class="nav-link" href="/new-event">Create Event</a>
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/logout">Log Out</a>
           {{else}}
             <a class="nav-link" href="/rsvp-events">Events You're Attending</a>
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/signup">Signup</a>
+            <a class="nav-link" href="/login">Log In</a>
+            <a class="nav-link" href="/signup">Sign Up</a>
           {{/if}}
         </div>
       </div>
@@ -64,6 +66,7 @@
       {{{body}}}
     </main>
 
+  </div>
   </body>
 
   <script
