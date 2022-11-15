@@ -167,54 +167,68 @@ router.get("/edit-event/:id", (req, res) => {
   });
 });
 
-//edit image
-// router.get("/edit-event/:id", (req, res) => {
-//   if (!req.session.loggedIn) {
-//     return res.redirect(`/`);
-//   }
-//   User.findByPk(req.session.userId, {
-//     include: [Event],
-//   }).then((foundUser) => {
-//     if (!foundUser) {
-//       return res.redirect("/404");
-//     }
-//     const hbsUser = foundUser.toJSON();
-//     console.log(hbsUser)
-//     const userEvents = hbsUser.events;
-//     console.log("user events: " + userEvents);
-//     console.log(req.params.id)
-//     let newArr = [];
-//     for (let i=0; i<userEvents.length; i++){
-//         if (userEvents[i].id == req.params.id) {
-//             newArr.push(userEvents[i])
-//         }
-//     }
-
-//     // console.log(newArr[0].event_photo)
-//     console.log(JSON.stringify(newArr[0].event_photo))
-//     const photoForEdits = JSON.stringify(newArr[0].event_photo)
-//     // console.log(JSON.stringify(eventIds))
-
-//     res.render("editEvent", {
-//       photoToEdit: photoForEdits,
-//       hbsUser: hbsUser,
-//       loggedIn: req.session.loggedIn,
-//       userId: req.session.userId,
-//     });
-//   });
-// });
-
 //render calendar
 router.get("/calendar", (req, res) => {
-  if (!req.session.loggedIn) {
-    return res.redirect(`/login`);
-  }
   res.render("calendar", {
     // hbsUser: hbsUser,
     loggedIn: req.session.loggedIn,
     userId: req.session.userId,
   });
 });
+
+
+
+//display rsvp events
+router.get("/rsvp-events", (req, res) => {
+  if (req.session.loggedIn) {
+    Invite.findAll({
+      where: {
+        invitee_id: req.session.userId
+      },
+      include: [Event],
+    }).then((foundInvite) => {
+      if (!foundInvite) {
+        return res.redirect("/404");
+      }
+      const inviteEvents = foundInvite.map((invite) => invite.get({ plain: true }));
+      console.log(inviteEvents)
+      let events = [];
+      for (let i = 0; i < inviteEvents.length; i++) {
+        events.push(inviteEvents[i].event)
+      }
+      console.log(events)
+      res.render("eventRsvp", {
+        events: events,
+        loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
+      })
+    });
+  } else {
+    Invite.findAll({
+      where: {
+        sess_id: req.sessionID
+      },
+      include: [Event],
+    }).then((foundInvite) => {
+      if (!foundInvite) {
+        return res.redirect("/404");
+      }
+      const inviteEvents = foundInvite.map((invite) => invite.get({ plain: true }));
+      console.log(inviteEvents)
+      let events = [];
+      for (let i = 0; i < inviteEvents.length; i++) {
+        events.push(inviteEvents[i].event)
+      }
+      console.log(events)
+      res.render("eventRsvp", {
+        events: events,
+        loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
+      })
+    })
+  }
+});
+
 
 router.get("/404", (req, res) => {
   res.render("404");

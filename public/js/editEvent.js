@@ -1,6 +1,7 @@
 const editEvent = document.querySelector("#edit-event-form");
 const returnToProf = document.querySelector("#return-to-profile")
 
+
 const cloudName = `dqv6cj4bc`;
 const apiKey = `444617613757917`;
 const currentURL = window.location.href;
@@ -8,6 +9,15 @@ const idNum = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 const privateEvent = document.querySelector("#private-checkbox")
 let body;
 let isPrivate;
+
+// returnToProf.style.display="none"
+
+// // let x = false;
+// if(x==true) {
+//   returnToProf.style.display="block"
+// } else {
+//   returnToProf.style.display="none"
+// }
 
 var widget = cloudinary.createUploadWidget(
     {
@@ -33,12 +43,12 @@ editEvent.addEventListener("submit", async (e) => {
   e.preventDefault();
   //   console.log("PREVENTED!");
   const name = document.querySelector('input[name="event-title"]').value;
-  const date = document.querySelector('input[name="event-date"]').value;
+  const eventDate = document.querySelector('input[name="event-date"]').value;
   const time = document.querySelector('input[name="event-time"]').value;
   const location = document.querySelector('input[name="event-location"]').value;
   const event_photo = body
   const description = document.querySelector(
-    'input[name="event-description"]'
+    'textArea[name="event-description"]'
   ).value;
   const edited_event = document.querySelector("#user-event").textContent;
   const event_creator = document.querySelector("#user-name").textContent;
@@ -47,7 +57,7 @@ editEvent.addEventListener("submit", async (e) => {
     method: "PUT",
     body: JSON.stringify({
       name,
-      date,
+      eventDate,
       time,
       location,
       event_photo,
@@ -63,6 +73,7 @@ editEvent.addEventListener("submit", async (e) => {
   if (res.ok) {
     // alert(name + " was successfully edited");
     window.location.reload();
+    // x=true;
   } else {
     alert("Failed to edit event");
   }
@@ -78,8 +89,43 @@ privateEvent.addEventListener("change", e=> {
   }
 })
 
-returnToProf.addEventListener("click", e => {
+returnToProf.addEventListener("click", async e => {
   e.preventDefault();
+
+  const name = document.querySelector('input[name="event-title"]').value;
+  const eventDate = document.querySelector('input[name="event-date"]').value;
+  const time = document.querySelector('input[name="event-time"]').value;
+  const location = document.querySelector('input[name="event-location"]').value;
+  const event_photo = body
+  const description = document.querySelector(
+    'textArea[name="event-description"]'
+  ).value;
+  const edited_event = document.querySelector("#user-event").textContent;
   const event_creator = document.querySelector("#user-name").textContent;
-  window.location.replace("/users/" + event_creator);
+
+  const res = await fetch(`/api/events/${idNum}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      name,
+      eventDate,
+      time,
+      location,
+      event_photo,
+      description,
+      isPrivate,
+      event_creator,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  //   console.log(res);
+  if (res.ok) {
+    const event_creator = document.querySelector("#user-name").textContent;
+    window.location.replace("/users/" + event_creator);
+  } else {
+    const event_creator = document.querySelector("#user-name").textContent;
+    window.location.replace("/users/" + event_creator);
+  }
+
 })
