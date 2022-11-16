@@ -1,4 +1,4 @@
-<div class="card p-2 m-2" id="event-details">
+<div id="card" class="card p-2 m-2" id="event-details">
   {{#if event_photo}}
   <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_300,h_200,c_fill,q_100/{{event_photo}}" class="card-img-top" alt="...">
   {{else}}
@@ -6,6 +6,6 @@
   {{/if}}
   <div class="card-body text-center">
     <a class="card-text text-capitalize font-weight-bold mb" id="card-title" href="/event/{{id}}"><span>{{name}}</span></a>
-    <p class="card-info"><span><br>Hosted by: {{user.name}} <br> {{moment eventDate format="dddd, MMMM Do YYYY"}} <br> {{time}}</span></p>
+    <p class="card-info text-capitalize"><span><br>Hosted by: {{user.name}} <br> {{moment eventDate format="dddd, MMMM Do YYYY"}} <br> {{time}}</span></p>
   </div>
 </div>
