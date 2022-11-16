@@ -166,7 +166,7 @@ a {
   padding: 10%;
 }
 #event-details {
-  margin-bottom: 75px !important;
+  margin-bottom: 75px!important;
 }
 
 #card {
@@ -390,3 +390,7 @@ body {
     border: 2px solid #3788d8;
   }
 }
+#card-title:link { text-decoration: none; }
+#card-title:visited { text-decoration: none; }
+#card-title:hover { text-decoration: none; }
+#card-title:active { text-decoration: none; }
