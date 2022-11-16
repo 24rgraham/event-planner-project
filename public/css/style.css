@@ -72,6 +72,7 @@ a span:active {
 
 /* Navbar */
 #navbar-nav {
+<<<<<<< HEAD
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
@@ -82,6 +83,16 @@ a span:active {
 	padding: 10;
 }
 
+=======
+  display: flex;
+  flex-direction: row!important;
+  justify-content: space-evenly;
+  z-index: 99;
+}
+#nav-link {
+  padding: 10;
+}
+>>>>>>> dev
 body {
   font-family: "Montserrat", sans-serif;
   line-height: 1.6;
@@ -151,11 +162,11 @@ a {
   align-self: center;
 }
 #calendar {
-	padding:10%;
-  }
-  #event-details {
-	margin-bottom: 75px!important;
-  }
+  padding: 10%;
+}
+#event-details {
+  margin-bottom: 75px !important;
+}
 @media (min-width: 769px) {
   .header,
   .main-nav {
@@ -168,7 +179,6 @@ a {
     margin: 0 auto;
     max-width: 1150px;
   }
-  
 }
 
 @media (min-width: 1025px) {
@@ -179,18 +189,18 @@ a {
 }
 
 @media screen and (max-width: 655px) {
-   #navbar-nav {
-	display: flex;
+  #navbar-nav {
+    display: flex;
     position: fixed;
     bottom: 0;
-	left: -0;
+    left: -0;
     width: 100%;
-	align-items: center;
-	justify-content: space-evenly!important;
-	background-color: #f4f4f4!important;
+    align-items: center;
+    justify-content: space-evenly !important;
+    background-color: #f4f4f4 !important;
   }
   #calendar {
-	padding: 1%;
+    padding: 1%;
   }
 
   .fc-event-main-frame {

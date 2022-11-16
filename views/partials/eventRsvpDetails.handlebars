@@ -6,6 +6,6 @@
   {{/if}}
   <div class="card-body">
     <a class="card-text" href="/event/{{id}}">{{name}}</a>
-    <p class="card-text">Hosted by: {{user.name}} <br> {{eventDate}} <br> {{time}} </p>
+    <p class="card-text"> {{moment eventDate format="dddd, MMMM Do YYYY"}} <br> {{time}} </p>
   </div>
 </div>
