@@ -1,8 +1,8 @@
 <h2 class="text-center page-title pt-4 pb-3">My Events</h2>
 <div class="container">
-    <div class="px-5 row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-4">
+    <div class="px-5 row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-4" id="event-details">
         {{#each events}}
-        <div id="card" class="card p-2 m-2" id="event-details" >
+        <div id="card" class="card p-2 m-2">
             {{#if event_photo}}
             <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_300,h_200,c_fill,q_100/{{event_photo}}" class="card-img-top" alt="...">
             {{else}}
