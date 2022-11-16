@@ -23,6 +23,6 @@ loginForm.addEventListener("submit", e => {
             location.reload()
         }
     }).then(data => {
-        location.href = `/users/${data.id}`
+        location.href = `/rsvp-events`
     })
 })

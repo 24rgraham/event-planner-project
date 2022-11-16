@@ -15,7 +15,7 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
+    eventDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
