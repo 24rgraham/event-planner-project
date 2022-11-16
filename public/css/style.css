@@ -16,22 +16,23 @@
 	margin: 5px;
 }
 
-.button span {
+.button span,
+a span {
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
-	transition: 0.5s;
+	transition: 0.4s;
 }
 
 .button span:after {
 	position: absolute;
 	opacity: 0;
 	top: 0;
-	transition: 0.5s;
+	transition: 0.4s;
 }
   
 .button:hover span {
-	letter-spacing: 0.5px;
+	letter-spacing: 0.3px;
 }
   
 .button:hover span:after {
@@ -39,16 +40,48 @@
 	right: 0;
 }
 
+/* Card */
+a span {
+  font-size: 25px;
+  color: #003366;
+  text-decoration: none;
+  padding-bottom: 5px;
+}
+
+a span:link {
+  text-decoration: none;
+}
+
+a span:visited {
+  text-decoration: none;
+}
+
+a span:hover {
+  letter-spacing: 0.1px;
+  color: #0059b3;
+  text-decoration: none;
+}
+
+a span:active {
+  text-decoration: none;
+}
+
+.card-info span {
+  color: #003366;
+}
+
 /* Navbar */
-  #navbar-nav {
+#navbar-nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	z-index: 99;
-  }
-  #nav-link {
+}
+
+#nav-link {
 	padding: 10;
-  }
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   line-height: 1.6;
