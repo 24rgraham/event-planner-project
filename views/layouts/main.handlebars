@@ -41,19 +41,23 @@
         class="navbar-nav  navbar-light bg-light"
         id="navbar-nav"
       >
-        {{#if loggedIn}}
-          <a class="nav-link" id="nav-link" href="/users/{{userId}}">Your Events</a>
-          <a class="nav-link" id="nav-link" href="/rsvp-events">Events You're
-            Attending</a>
-          <a class="nav-link" id="nav-link" href="/calendar">Calendar</a>
-          <a class="nav-link" id="nav-link" href="/new-event">Create Event</a>
-          <a class="nav-link" id="nav-link" href="/logout">Logout</a>
-        {{else}}
-          <a class="nav-link" id="nav-link" href="/rsvp-events">Upcoming Events</a>
-          <a class="nav-link" id="nav-link" href="/calendar">Calendar</a>
-          <a class="nav-link" id="nav-link" href="/login">Login</a>
-          <a class="nav-link" id="nav-link" href="/signup">Signup</a>
-        {{/if}}
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav d-flex justify-content-end">
+          {{#if loggedIn}}
+            <a class="nav-link" id="nav-link" href="/users/{{userId}}">My Events</a>
+            <a class="nav-link" id="nav-link" href="/rsvp-events">Upcoming Events</a>
+            <a class="nav-link" id="nav-link" href="/calendar">Calendar</a>
+            <a class="nav-link" id="nav-link" href="/new-event">New Event</a>
+            <a class="nav-link" id="nav-link" href="/logout">Logout</a>
+          {{else}}
+            <a class="nav-link" id="nav-link" href="/rsvp-events">Upcoming Events</a>
+            <a class="nav-link" id="nav-link" href="/calendar">Calendar</a>
+            <a class="nav-link" id="nav-link" href="/login">Login</a>
+            <a class="nav-link" id="nav-link" href="/signup">Signup</a>
+          {{/if}}
+        </div>
       </div>
 
     </nav>
