@@ -52,16 +52,16 @@ router.get('/', (req, res) => {
   })
 })
 
-  //get all public
-  router.get('/public',(req,res)=>{
-    Event.findAll({
-
-    }).then(eventData=>{
-        res.json(eventData)
-    }).catch(err=>{
-        res.status(500).json({msg:"An error has occurred",err})
+//get all public
+router.get("/public", (req, res) => {
+  Event.findAll({})
+    .then((eventData) => {
+      res.json(eventData);
     })
-  })
+    .catch((err) => {
+      res.status(500).json({ msg: "An error has occurred", err });
+    });
+});
 
 //get one event
 router.get('/:id', (req, res) => {
