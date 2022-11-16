@@ -1,67 +1,147 @@
-{{!-- <h1>Edit Event Page!</h1> --}}
-<div class="card p-3 m-3">
-    <div class="card-header">
-        <h2>Edit {{hbsUser.name}}'s Event</h2>
+{{! <h1>Edit Event Page!</h1> }}
+{{!-- Event takes in a name, date, time, location, and description --}}
+{{!-- <link href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        rel="stylesheet"> --}}
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+    </script>
+ 
+    <!-- Include Moment.js CDN -->
+    <script type="text/javascript" src=
+"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+    </script>
+ 
+    <!-- Include Bootstrap DateTimePicker CDN -->
+    <link
+        href=
+"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet">
+ 
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
+        </script>
+
+<div class="card p-3 m-3" id="event-details">
+  <div class="card-header">
+    <h2>Edit {{hbsUser.name}}'s Event</h2>
+  </div>
+  <form class="card-body" id="edit-event-form">
+    <div class="form-group">
+      <label for="event-title" class="form-label">Title</label>
+      <input
+        name="event-title"
+        class="form-control"
+        type="text"
+        id="event-title"
+        value="{{userEvents.name}}"
+      />
+
     </div>
-    <form class="card-body" id="edit-event-form">
+    <div class="row">
+      <div class="col">
         <div class="form-group">
-            <label for="event-title" class="form-label">Title</label>
-            <input name="event-title" class="form-control" type="text" id="event-title" value="{{userEvents.name}}">
-    
+          <label for="event-date" class="form-label">Date</label>
+          <input
+            name="event-date"
+            class="form-control"
+            type="date"
+            id="event-date"
+            value="{{userEvents.eventDate}}"
+            min="2022-11-01"
+            max="2024-01-01"
+          />
         </div>
-<div class="row">
-    <div class="col">
+      </div>
+      <div class="col">
         <div class="form-group">
-            <label for="event-date" class="form-label">Date</label>
-            <input name="event-date" class="form-control" type="date" id="event-date" value="{{userEvents.eventDate}}" min="2022-11-01" max="2024-01-01" >
+          <label for="event-time" class="form-label">Time</label>
+          <input
+            name="event-time"
+            class="form-control"
+            type="text"
+            id="event-time"
+            value="{{userEvents.time}}"
+          />
+      <script>// Below code sets format to the // datetimepicker having id as //event-time 
+        $('#event-time').datetimepicker({ format: 'HH:mm' });
+      </script>
         </div>
-</div>
-<div class="col">
-        <div class="form-group">
-            <label for="event-time" class="form-label">Time</label>
-            <input name="event-time" class="form-control" type="time" id="event-time" value="{{userEvents.time}}">
-        </div>
-</div>
-</div>
-        <div class="form-group">
-            <div class="photo-to-edit">
-            <img src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{userEvents.event_photo}}" class="card-img-top" alt="...">
-            <button class="btn btn-primary" id="upload_widget">Upload New Image</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="event-location" class="form-label">Location</label>
-            <input name="event-location" class="form-control" type="text" id="event-location" value="{{userEvents.location}}">
-        </div>
-        <div class="form-group">
-            <label for="event-description" class="form-label">Description</label>
-            <textarea name="event-description" class="form-control" rows="3" type="text" >{{userEvents.description}}</textarea>
-        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="photo-to-edit">
+        <img
+          src="https://res.cloudinary.com/dqv6cj4bc/image/upload/w_200,h_200,c_fill,q_100/{{userEvents.event_photo}}"
+          class="card-img-top"
+          alt="..."
+        />
+        <button class="btn btn-primary" id="upload_widget">Upload New Image</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="event-location" class="form-label">Location</label>
+      <input
+        name="event-location"
+        class="form-control"
+        type="text"
+        id="event-location"
+        value="{{userEvents.location}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="event-description" class="form-label">Description</label>
+      <textarea
+        name="event-description"
+        class="form-control"
+        rows="3"
+        type="text"
+      >{{userEvents.description}}</textarea>
+    </div>
 
-        <div class="input-group mb-3 col-4">
-            <div class="input-group-prepend">
-                <div class="input-group-text mr-3">
-                
-                {{#if userEvents.isPrivate}}
-                <input id="private-checkbox" type="checkbox" aria-label="Checkbox for following text input" checked>
-                {{else}}
-                <input id="private-checkbox" type="checkbox" aria-label="Checkbox for following text input">
-                {{/if}}
-                </div>
-            </div>
-            <label for="private-event" class="form-label">Mark as private event</label>
-        </div>
+    <div class="input-group mb-3 col-12">
+      <div class="input-group-prepend">
+        <div class="input-group-text mr-3">
 
-        <div class="d-flex flex-column  align-items-center">
-        <button type="submit" class="btn btn-primary m-2 col-6">Preview Changes</button>
-        <button id="return-to-profile" type="submit" class="btn btn-primary m-2 col-6">Update and Return to Profile</button>
+          {{#if userEvents.isPrivate}}
+            <input
+              id="private-checkbox"
+              type="checkbox"
+              aria-label="Checkbox for following text input"
+              checked
+            />
+          {{else}}
+            <input
+              id="private-checkbox"
+              type="checkbox"
+              aria-label="Checkbox for following text input"
+            />
+          {{/if}}
         </div>
-    </form>
+      </div>
+      <label for="private-event" class="form-label">Mark as private event</label>
+    </div>
+
+    <div class="d-flex flex-column align-items-center">
+      <button type="submit" class="btn btn-primary m-2 col-6">Preview Changes</button>
+      <button
+        id="return-to-profile"
+        type="submit"
+        class="btn btn-primary m-2 col-6"
+      >Update and Return to Profile</button>
+    </div>
+  </form>
 </div>
 
 <p id="user-name" style="display:none">{{hbsUser.id}}</p>
 
 <p id="user-event" style="display:none">{{userEvent}}</p>
 
-<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script> 
+<script
+  src="https://upload-widget.cloudinary.com/global/all.js"
+  type="text/javascript"
+></script>
 <script src="/js/editEvent.js"></script>
